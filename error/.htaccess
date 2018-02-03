@@ -1,0 +1,3 @@
+ErrorDocument 404 /wjb5377/230/error/error.html
+DirectoryIndex noterror.html
+ModPagespeed off

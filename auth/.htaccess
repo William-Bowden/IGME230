@@ -1,0 +1,6 @@
+DirectoryIndex myPage.html
+AuthType shibboleth
+AuthName "RIT"
+ShibRequireSession On
+SSLRequireSSL
+require valid-user
