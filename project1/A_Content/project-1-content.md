@@ -29,4 +29,4 @@ Here a more in-depth game design document will be written out with ideas, contro
 This page will possess a 'plot' in which the game will sit once it is implemented
 
 # Heads-up
-This content document is a little lacking because I was under the impression the assignment that was due was the html/css mockup of our website.
+This content document is a little lacking because I was under the impression the assignment that was due was the html/css mockup of our website and have begun implementation of it [here](https://people.rit.edu/wjb5377/230/project1/)
