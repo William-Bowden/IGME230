@@ -1,0 +1,275 @@
+#space{
+    height: 150px;
+}
+#current{
+    background-color: #004C32;
+    border-left: 1px solid #267F61;
+    color: white;
+}
+#gameWindow{
+    background-color: darkgrey;
+    min-height: 600px; 
+    width: 100%;
+    height: 100%;
+}
+.center{
+    margin: auto;
+    width: 30%;
+    padding: 30px;
+	animation: fadeInUpBig 1s;
+}
+.center img{
+    margin: auto;
+	padding: 0px;
+	display: block;
+}
+.icon{
+	display: inline-block;
+	margin: auto;
+	margin-top: 7.5px;
+}
+.deepshadow {
+    color: whitesmoke;
+    letter-spacing: .1em;
+    text-shadow: 
+      1px 1px 1px #2e2e2e, 
+      1px 2px 1px #2c2c2c, 
+      2px 3px 1px #2a2a2a, 
+      2px 4px 1px #282828, 
+      3px 5px 1px #262626, 
+      3px 6px 1px #242424, 
+      4px 7px 1px #222222, 
+      4px 8px 2px #202020, 
+      5px 9px 5px #1e1e1e, 
+      5px 10px 10px #1c1c1c, 
+      5px 11px 20px #1a1a1a, 
+      5px 12px 30px #181818,  
+      5px 19px 39px rgba(0, 0, 0, 0.9);
+  }
+
+/*__________Body__________*/
+body{
+    background-color: #65FFCB;
+}
+
+
+
+/*__________Heading/Banner__________*/
+header{
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #00CC86;
+	border-bottom: 2px solid black;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+header div h1{
+	font-family: sans-serif;
+    text-align: center;
+}
+header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+	width: 100%;
+}
+header li {
+	width: 25%;
+    float: left;
+}
+header li a {
+	width: 100%;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+/*    font-size: 1em;*/
+    border-right: 1px solid #267F61;
+}
+header li a:hover {
+    animation: bounceIn 2s;
+    animation-fill-mode: forwards;  
+}
+header li a:active {
+    animation: clicked .5s; 
+}
+
+
+
+/*__________Content Section__________*/
+#largeframe{
+	border: 2px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    max-width: 700px;
+    width: 70%;
+    padding-bottom: 100px;
+    background-color: white;
+}
+h3{
+	font-family: sans-serif;
+	font-size: 28px;
+	border-bottom: 2px solid black;
+	clear: both;
+}
+#largeframe p{
+	font-family: 'Roboto Condensed', sans-serif;
+	line-height: 1.4;
+	font-size: 1em;
+	text-align: justify;
+    clear: both;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    animation: fadeInUpBig 2s;
+}
+#largeframe a:hover{
+    animation: lightUp 2s;
+}
+table{
+    width: 100%;
+}
+td{
+    padding: 5px;
+    max-width: 33%;
+}
+table div{
+    background-color: #5EABDD;
+    border: 2px solid black;
+    width: 100%;
+    height: 100px;
+    font-family: sans-serif;
+    font-size: 1em;
+    text-align: center;
+}
+table div:hover{
+    animation: bounceIn 2s;
+    animation-fill-mode: forwards;  
+}
+table div p{
+    text-align-last: center;
+    padding: 25%;
+}
+
+
+
+
+/*__________Footer Section__________*/
+footer{
+	border: 2px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+	background-color: #00CC86;
+	min-height: 50px;
+    min-width: 250px;
+	padding: 20px;
+	margin: 70px;
+	margin-bottom: 0px;
+	clear: both;
+	animation: fadeInUpBig 1.5s;
+}
+footer div{
+	float: right;
+}
+footer p{
+	font-family: 'Roboto Condensed', sans-serif;
+	float: left;
+	margin-right: 10px;
+	padding: 5px 0px 0px 0px;
+}
+footer a{
+    padding: 5px 10px 5px 10px;
+    border-left: 2px solid #267F61;
+    border-right: 2px solid #267F61;
+}
+#links{
+    font-family: 'Roboto Condensed', sans-serif;
+	float: left;
+	padding: 20px;
+}
+#links a{
+    margin: 5px;
+    border-width: 2px;
+}
+
+
+/*__________Links__________*/
+a{
+    text-decoration: none;
+    color: black;
+}
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+	animation: bounceIn 2s;
+    animation-fill-mode: forwards;  
+}
+a:active {
+    animation: clicked .5s; 
+}
+
+
+@keyframes bounceIn {
+	0% {
+		transform: scale(1.15);
+	}
+	20%{
+		transform: scale(1);
+		color: white;
+	}
+    50%{
+        background-color: #008C5C;
+    }
+	100%{
+		color: white;
+		background-color: #008C5C;
+	}
+}
+
+@keyframes bounceInLight {
+	0% {
+		transform: scale(1.15);
+	}
+	20%{
+		transform: scale(1);
+	}
+    50%{
+        background-color: #0F85D1;
+    }
+	100%{
+		background-color: #0F85D1;
+	}
+}
+
+@keyframes lightUp {
+	0% {
+		color: #3498db;
+	}
+	30% {
+		color: #3498db;
+	}
+}
+
+@keyframes fadeInUpBig {
+	0%{
+		opacity: 0;
+		transform: translate(0, 50%);
+	}
+
+	75%{
+		transform: none;
+	}
+
+	100%{
+		opacity: 1;
+	}
+}
+
+@keyframes clicked {
+	30%{
+		background-color: #00D98E;
+	}
+}
