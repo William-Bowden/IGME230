@@ -1,0 +1,57 @@
+1. Who created the initial version of JavaScript in 1995?
+Brendan Eich
+
+2. What is the official name of JavaScript?
+ECMAScript 
+
+3. Which versions of JavaScript will we be covering in this course?
+ECMAScript 5 (2009)
+
+4. How can you get the interactive JavaScript REPL to appear in Chrome?
+F12 > Console OR R-Click > Inspect > Console
+
+5. Which JavaScript keyword declares variables?
+let
+
+6. Which JavaScript keyword declares "constants" (i.e. a binding to a value that can not be changed)?
+const
+
+7. What is the name of the error that occurs when you try to change the reference to a previously declared constant like const a=10;?
+TypeError
+
+8. Find the MDN page - https://developer.mozilla.org/ - for the type of error you saw in the previous question, and give the 1-line summary of that error from the top of that MDN page.
+The TypeError object represents an error when a value is not of the expected type.
+
+9. What are the 5 built-in JavaScript "primitive" data types?
+Number, Null, String, Undefined, Boolean
+
+10. What kinds of values can a Number type hold? (Google it)
+Number values.
+
+11. True or False. JavaScript variables DO NOT have types, but JavaScript values DO have types.
+True
+
+12. Give an example of boxing in JavaScript.
+let pi = 3.14159265; 
+pi = pi.toFixed(2); // "3.14"
+
+13. Give a line of code that will convert the string "3.14" to a Number.
+let y = Number("3.14");
+
+14. What does NaN stand for?
+Not a Number
+
+15. Give an example of an operation that will produce a value of Infinity.
+Dividing by zero
+
+16. Give an advantage of JavaScript's strict mode.
+You can't use undeclared variables, making it easier to write secure code.
+
+17. Which of the following examples will evaluate to true in a boolean context (ex. inside an if statement)? (Try them out in the browser if you are not sure) 
+	No - undefined, null, false, 0, "", '' 
+	No - 0.0
+	Yes- "undefined", "null"
+	Yes- "false"
+	Yes- "true"
+	Yes- new Date()
+	Yes- new Array(), []

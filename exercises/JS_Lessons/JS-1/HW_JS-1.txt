@@ -1,0 +1,17 @@
+What is a Web App?
+A web app is a client-server computer program in which the client runs in a web browser.
+
+What are the 3 major components of a web browser that can be scripted/controlled by a web developer?
+Web Layout Engine, Javascript Engine, Web Browser APIs
+
+What languages are commonly used to "program" the Web Layout Engine?
+HTML & CSS
+
+How are new web browser features proposed?
+Proposed? All over the place. Standardized and widely implemented? It could take a long time for some features to be put into place and become "standard"
+
+Who is in charge of web standards - the standards bodies or the browser vendors?
+No ONE person/organization. Both work back and forth until new standards just sort of happen.
+
+List 3 places a web developer can find "web app" documentation.
+w3.org, exma-international.org, html.spec.whatwg.org
