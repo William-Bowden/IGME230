@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    
+	<meta charset="utf-8" />
+    
+	<title>DOM-3</title>
+    
+	<style>
+        
+		body{border:1px solid gray;}
+		p b{transform: rotate(20deg)}
+        
+	</style>
+    
+</head>
+    
+<body>
+    
+    <h1>My Page</h1>
+
+    <h2>Info</h2>
+
+    <h2>Pictures</h2>
+
+    <h2>More Info</h2>
+
+    <p>Blah <b>Blah</b> Blah</p>
+
+    <p>Blah <b>Blah</b> Blah</p>
+
+    <p id="lastParagraph">Blah <b>Blah</b> Blah</p>
+
+    <footer>Copyright &copy; <b>20XX</b></footer>
+
+    <script>
+
+        "use strict";
+        let allHeadings = document.querySelectorAll("h2");
+
+        //#1 change text of h1
+        let firstH1 = document.querySelector("h1");
+        firstH1.innerHTML = "My UFO Page";
+        
+        //#2-4 Change text of h2s 
+        allHeadings[0].innerHTML = "My UFO Info";
+        allHeadings[1].innerHTML = "My UFO Pictures";
+        allHeadings[2].innerHTML = "";
+
+        //#5 Body element style changes
+        let body = document.body;
+        
+        let reddish = "#F05757";
+        
+        body.style.fontFamily = "sans-serif";
+        body.style.color = reddish;
+        
+        //#6 Make changes to the paragraphs
+        let allparagraphs = document.querySelectorAll("p");
+        let paragraph1 = allparagraphs[0];
+        
+        paragraph1.innerHTML = "Report your UFO sightings here: <a href = 'http://www.nuforc.org'>http://www.nuforc.org</a>"
+
+        paragraph1.style.color = "green";
+        paragraph1.style.fontWeight = "bold";
+        paragraph1.style.fontSize = "2em";
+        paragraph1.style.textTransform = "uppercase";
+        paragraph1.style.textShadow = "3px 2px #A44";
+        
+        allparagraphs[1].innerHTML = ""
+
+        allparagraphs[2].innerHTML = "<img src='https://thumbs-prod.si-cdn.com/1WBFYQcGSYcZlKuDHnHvzqd9GGk=/800x600/filters:no_upscale()/https://public-media.smithsonianmag.com/filer/cc/bb/ccbb5e39-e6f0-4d6e-9b64-c1ae44b58f5c/istock-611295678.jpg' alt='UFO'>"
+        
+        let footer = document.querySelector("footer");
+        
+        footer.innerHTML = "William Bowden - 2018";
+
+    </script>
+    
+</body>
+    
+</html>

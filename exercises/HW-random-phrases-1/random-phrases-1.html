@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+	<head>
+        
+        <link type="text/css" rel="stylesheet" href="main.css"/>
+
+        <title>Bender</title>
+		
+	</head>
+    
+    <body>
+    
+		<header>
+            
+        </header>
+
+        <div class="image">
+
+            <img src="https://uproxx.files.wordpress.com/2015/12/bender-futurama.jpg?quality=95&w=1024" alt="Bender_Futurama"/>
+            
+            <h1>Bender The Great</h1>
+            
+            <p>Quote</p>
+
+        </div>
+
+        <footer>
+            
+        </footer>
+        
+        <script>
+        
+            "use strict";
+            
+            let quotes = ["Bite my shiny metal ass", "Shut up baby, I know it", "Quote 3"];
+            
+            let paragraph = document.querySelector("p");
+            
+            let i = Math.floor(Math.random() * Math.floor(quotes.length));
+            
+            paragraph.innerHTML = quotes[i];
+        
+        </script>
+        
+        
+	</body>
+</html>
