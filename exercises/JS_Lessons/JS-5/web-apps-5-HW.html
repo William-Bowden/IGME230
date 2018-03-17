@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    
+	<meta charset="utf-8" />
+    
+	<title>Web Apps-5-HW</title>
+    
+	<style>
+        
+		body{border:1px solid gray;}
+            
+	</style>
+    
+</head>
+    
+<body>
+    
+    <h1>My Favorites</h1>
+
+    <h2>My Favorite Colors</h2>
+
+    <ol id="colorsList">
+
+    </ol>
+
+    <h2>My Favorite Foods</h2>
+
+    <ol id="foodsList">
+
+    </ol>
+
+    <h2>My Favorite Links</h2>
+
+    <ol id="linksList">
+
+    </ol>
+
+    <script>
+
+        "use strict";
+        
+        function createList(listElement,array = ["Puppydogs", "Butterflies", "Lollipops"]){
+//            for(let i = 0; i < array.length; i++){
+//                let li = document.createElement("li");
+//
+//                let textNode = document.createTextNode(array[i]);
+//
+//                li.appendChild(textNode);
+//
+//                listElement.appendChild(li);
+//            }
+            for(let item of array){
+                let li = document.createElement("li");
+
+                li.innerHTML = item;
+
+                listElement.appendChild(li);
+            }
+        }
+
+        let colors = ["Red","Blue","Grey","Black","Green"];
+        let foods = ["Chicken", "Sweet Potatoes", "Dinner Rolls"]; // add some foods
+        
+        let orderedLists = document.querySelectorAll("ol");
+        
+        createList(orderedLists[0], colors);
+        createList(orderedLists[1], foods);
+
+
+        // Optional - can you figure out how to pull both the key AND the value
+        // from the `links` object literal?
+        let links = {
+            "RIT": "http://www.rit.edu",
+            "RWAG" : "https://www.facebook.com/RWAGclub",
+            "New Media Club" : "http://newmediaclub.cias.rit.edu"
+        }
+        
+        for( let link in links ){
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+                        
+            a.innerHTML = "<a href='" + links[link] + "'>" + link + "</a>";
+            li.appendChild(a);
+
+            orderedLists[2].appendChild(li);
+        }
+
+    </script>
+    
+</body>
+    
+</html>
