@@ -56,32 +56,34 @@
     <script>
         
         let legend = document.querySelector("legend");
-        
+
         let textbox = document.getElementById("info");
-                
-        let radioRed = (e) => 
-            {   
-                textbox.innerHTML = "You have selected red";
-                legend.style.color = "red";
-            };
-        let radioGreen = (e) => 
-            {   
-                textbox.innerHTML = "You have selected green";
-                legend.style.color = "green";
-            };
-        let radioBlue = (e) => 
-            {   
-                textbox.innerHTML = "You have selected blue";
-                legend.style.color = "blue";
-            };
+
+        let selectColor = (e) => 
+        {   
+            textbox.innerHTML = "You have selected " + e.target.value + "!";
+            legend.style.color = e.target.value;
+        };
         
-        
-        
-        let radioButtons = document.querySelectorAll("p");
-        
-        radioButtons.item(0).addEventListener("click", radioRed);
-        radioButtons.item(1).addEventListener("click", radioGreen);
-        radioButtons.item(2).addEventListener("click", radioBlue);
+        let finalize = (e) => 
+        {   
+            if(!legend.style.color){
+                textbox.innerHTML = "Please select a color.";
+            }
+            else{
+                textbox.innerHTML = "Your FINAL CHOICE is " + legend.style.color + "!";
+            }
+        };
+
+
+        let paragraphs = document.querySelectorAll("p");
+
+        for( let i = 0; i < 3; i++ ){
+            paragraphs[i].addEventListener("change", selectColor);
+        }
+
+        paragraphs.item(3).firstChild.addEventListener("click", finalize);
+
         
     </script>
     

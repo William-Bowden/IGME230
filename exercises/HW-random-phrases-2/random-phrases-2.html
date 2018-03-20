@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+	<head>
+        
+        <link type="text/css" rel="stylesheet" href="main.css"/>
+
+        <title>Bender The Great</title>
+		
+	</head>
+    
+    <body>
+    
+		<header>
+            
+        </header>
+
+        <div class="image">
+
+            <img src="https://uproxx.files.wordpress.com/2015/12/bender-futurama.jpg?quality=95&w=1024" alt="Bender_Futurama"/>
+            
+            <h1>Bender The Great</h1>
+            
+            <p>Quote</p>
+            
+            <p id="button">
+            
+                Next!
+            
+            </p>
+
+        </div>
+
+        <footer>
+            
+        </footer>
+        
+        <script>
+        
+            "use strict";
+            
+            let quotes = ["Bite my shiny metal ass", 
+                          "Shut up baby, I know it",
+                          "I love stealin'",
+                          "I love takin' things!",
+                          "Oh wait, you're serious, let me laugh even harder.",
+                          "I guess if you want children beaten, you have to do it yourself.",
+                          "Yeah yeah, big whoop, no one cares; I've got Bender related news.",
+                          "Hahahahaha. Oh wait you’re serious. Let me laugh even harder.",
+                          "Anything less than immortality is a complete waste of time.",
+                          "Blackmail is such an ugly word. I prefer extortion. The ‘x’ makes it sound cool.",
+                          "Have you tried turning off the TV, sitting down with your children, and hitting them?",
+                          "Afterlife? If I thought I had to live another life, I’d kill myself right now!"];
+            
+            let paragraph = document.querySelector("p");
+            
+            let button = document.getElementById("button");
+            
+            let i = Math.floor(Math.random() * Math.floor(quotes.length));
+            
+            let quote = quotes[i];
+            
+            if(paragraph){
+                paragraph.innerHTML = quote;
+            }
+            
+            let displayQuote = (e) => {
+                i = Math.floor(Math.random() * Math.floor(quotes.length));
+            
+                quote = quotes[i];
+                
+                paragraph.innerHTML = quote;
+            }
+            
+            button.addEventListener("click", displayQuote);
+        
+        </script>
+        
+        
+	</body>
+    
+    <footer>
+    
+        William Bowden
+        
+    </footer>
+    
+</html>

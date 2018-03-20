@@ -1,0 +1,112 @@
+.image { 
+    margin-top: 1%;
+    margin-left: 12.5%;
+    position: relative; 
+    width: 100%;
+}
+
+body{
+    background-color: lightgrey;
+}
+
+img{
+    width: 75%;
+}
+
+h1 { 
+    position: absolute; 
+    top: 2%; 
+    width: 75%; 
+    margin: 0px;
+    text-align: center;
+    color: white;
+    font-size: 3em;
+    text-shadow: 2px 2px #000000;
+}
+
+p { 
+    position: absolute; 
+    bottom: 12%; 
+    width: 65%; 
+    margin: 0px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    text-shadow: 2px 2px #000000;
+    word-wrap: break-word;
+}
+
+footer{
+    color: dimgrey;
+    text-align: right;
+}
+
+#button {
+    background-color: darkgrey;
+    color: white;
+    
+    bottom: 2.5%;
+    margin-left: 55%;
+    margin-right: 0%;
+    width: 15%;
+    
+    border-bottom: 4px solid dimgrey;
+    border-right: 3px solid dimgrey;
+    border-radius: 15px;
+    
+    text-shadow: none;
+}
+
+#button:hover{
+    animation: hoverAnim 0.5s;
+    animation-fill-mode: forwards;
+}
+
+#button:active{
+    animation: clickAnim 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hoverAnim {
+	50%{
+		background-color: lightgrey;
+        transform: scale(1.05);
+	}
+
+	100%{
+		background-color: lightgrey;
+        color: rgb(80,80,80);
+        transform: scale(1.05);
+	}
+}
+
+@keyframes clickAnim {
+	25%{
+		background-color: dimgray;
+        transform: scale(.9);
+	}
+
+	100%{
+		background-color: dimgray;
+        transform: scale(.9);
+	}
+}
+
+@media only screen and (max-width: 720px) {
+    h1{
+        font-size: 2em;
+    }
+    p{
+        font-size: 1.5em;
+    }
+}
+@media only screen and (max-width: 420px) {
+    h1{
+        font-size: 1.2em;
+    }
+    p{
+        font-size: .9em;
+    }
+}
