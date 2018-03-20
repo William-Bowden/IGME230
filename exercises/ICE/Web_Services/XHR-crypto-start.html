@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+ 	<title>XHR Start</title>
+ 	<style>
+		*{
+			font-family:verdana,tahoma,sans-serif;
+		}
+		
+		body{
+			margin-left: 2em;
+		}
+	
+ 		header{
+ 			height:195px;
+ 		}
+ 		
+ 		header h1{
+ 			margin:0;
+ 			color:blue;
+ 			text-align:center;
+ 			font-size:100px;
+ 			padding-top: 35px;
+ 		}
+ 		
+ 		.result {
+			position: relative;
+			height: 175px;
+			width: 100px;
+			float:left;
+			border:1px solid gray;
+			padding:5px;
+			margin-left:10px;
+			margin-bottom:10px;
+		}
+		
+		button{
+		  display : inline-block;
+		  cursor : pointer;
+		  border-style : solid;
+		  border-width : 1px;
+		  border-radius : 50px;
+		  padding : 10px 18px;
+		  box-shadow : 0 1px 4px rgba(0,0,0,.6);
+		  font-size : 9.5pt;
+		  font-weight : bold;
+		  color : #fff;
+		  text-shadow : 0 1px 3px rgba(0,0,0,.4);
+		  font-family : sans-serif;
+		  text-decoration : none;
+		}
+		
+		button.green{
+			border-color: #8fc800;
+	  	background: #8fc800;
+	  	background: linear-gradient(top, #8fc800 0%,#438c00 100%);
+		}
+		
+		button:focus {outline:0;}
+		
+ 		
+ 	</style>
+	<!-- Import jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  
+ 
+  <script>
+  
+
+
+	window.onload = init;
+	
+	function init(){
+		document.querySelector("#search").onclick = getData;
+	}
+	
+	// MY FUNCTIONS
+	function getData(){
+	
+		// build up our URL string
+		// https://coinmarketcap.com/api/
+		let url = "https://api.coinmarketcap.com/v1/ticker/";
+		
+		// call the web service, and prepare to download the file
+		document.querySelector("#content").innerHTML = `<p>loading ${url}</p>`;
+		console.log(`loading ${url}`);
+		
+		
+	 	$.ajax({
+ 		  dataType: "json",
+ 		  url: url,
+ 		  data: null,
+ 		  success: jsonLoaded, // this is called when the data has loaded
+ 		  error: ajaxErrorHandler
+ 		});
+		
+	}
+	
+	function ajaxErrorHandler(xhr, status, error){
+		// TODO: display the error
+	}
+	
+	function jsonLoaded(obj){
+		console.log("obj = " +obj);
+		console.log("obj stringified = " + JSON.stringify(obj));
+		
+		// TODO: parse and display results
+        let bigString = "<div>";
+        
+        let length = obj.length;
+        
+        bigString += "<p>" + length + "</p>";
+        
+        bigString += "<ol>";
+        
+        for(let r of obj){
+            bigString += "<li>" + r.name + " - $" + r.price_usd + "</li>";
+        }
+       
+        bigString += "</ol>";
+        
+        bigString += "</div>";
+        
+        document.querySelector("#content").innerHTML = bigString;
+	}	
+	
+
+  </script>
+
+  
+</head>
+<body>
+<header>
+ <h1>Web Service App</h1>
+</header>
+
+<p>Search Term -&gt; <input id="myselect" type="text" size="20" maxlength="20" autofocus value="some value" /></p>
+<p>Max # results -&gt; <select id="limit">
+						<option value="5">5</option>
+						<option value="10" selected>10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					   </select>
+</p>
+<p><button type="button" id="search" class="green">Hit up web service<br />:-)</button></p>
+<hr>
+<h2>Results</h2>
+ <div id="content">
+ <p>No data yet!</p>
+ </div>
+ 
+
+</body>
+</html>
