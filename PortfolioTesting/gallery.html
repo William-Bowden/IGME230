@@ -8,57 +8,78 @@
 <style>
     
     #mainImage{
-/*
-        margin-left: 25%;
-        margin-right: 25%;
-*/
         padding: 10px;
     }
     
     #mainImage img{
-        width: 80%;
-        margin-left: 10%;
-        margin-right: 10%;
+        width: 40%;
+        margin-left: 30%;
+        margin-right: 30%;
     }
     
     #thumbnails{
-        margin-left: 12.5%;
+        margin-left: 25%;
     }
     
     #thumbnails img{
-        width: 20%;
+        width: 15%;
     }
     
     img{
         border: solid 1px darkgrey;
     }
     
+    @media only screen and (max-width: 750px) {
+        
+        #mainImage{
+            padding: 10px;
+        }
+
+        #mainImage img{
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        #thumbnails{
+            margin-left: 18%;
+        }
+
+        #thumbnails img{
+            width: 18.5%;
+        }
+    }
+    
 </style>
 
 <body>
     
-    <div id="thumbnails">
+    <div id="imageGallery">
     
-        <img src="images/cassie.jpg">
-        <img src="images/eagle.jpg">
-        <img src="images/seal.jpg">
-        <img src="images/wolf.jpg">
-        
-    </div>
+        <div id="thumbnails">
     
-    <div id="mainImage">
-    
-        <img src="">
-        
-    </div>
+            <img src="images/cassie.jpg">
+            <img src="images/eagle.jpg">
+            <img src="images/seal.jpg">
+            <img src="images/wolf.jpg">
 
+        </div>
+
+        <div id="mainImage">
+
+            <img src="">
+
+        </div>
+    
+    </div>
+    
     <script>
         
         let mainImage = document.querySelector("#mainImage").querySelector("img");
         let thumbnails = document.querySelector("#thumbnails").querySelectorAll("img");
         
         let current = thumbnails[0];
-        current.style.opacity = 0.5;
+        current.style.opacity = 0.3;
         
         mainImage.src = current.src; 
         
@@ -71,7 +92,7 @@
             
             // set new current and update the opacity
             current = e.target;
-            current.style.opacity = "0.5";
+            current.style.opacity = "0.3";
             
             // set image
             mainImage.src = current.src;       
