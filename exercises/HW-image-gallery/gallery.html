@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    
+	<meta charset="utf-8" />
+    
+    <title>Image Gallery</title>
+    
+    <style>
+        
+        body {
+            font-family: "Helvetica","Arial",serif;
+            color: #333;
+            background-color: #fff;
+            margin: 1em 10%;
+        }
+
+        #main {
+            padding-top: 30px;
+            width: 400px;
+            margin: 0 auto;
+        }
+        
+        #description{
+            text-align: center;
+        }
+
+        span[data-image]{
+            transition-property: opacity;
+            transition-duration: 0.5s;
+            color: #c60;
+            background-color: transparent;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        span[data-image]:hover{
+            opacity: 0.5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            background-color: transparent;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            float: left;
+            padding: 1em;
+            list-style: none;
+            margin-left: 5%
+        }
+
+        img {
+            display:block;
+            clear: both;
+            box-shadow: 7px 7px 5px #888;
+            border:1px solid #aaa;
+            transition-property: opacity;
+            transition-duration: 0.5s;
+        }
+
+        footer{
+            font-size:70%;
+            color:#bbb;
+            text-align:center;
+        }
+        
+    </style>
+      
+</head>
+
+<body>
+    
+    <section id="main">
+
+        <h1>Snapshots</h1>
+
+        <ul>
+            <li><span data-image="cassie.jpg" title="Cassie, the black dog.">Cassie</span></li>
+            <li><span data-image="seal.jpg" title="Alfred, the seal.">Seal</span></li>
+            <li><span data-image="wolf.jpg" title="Majesty, the wolf.">Wolf</span></li>
+            <li><span data-image="eagle.jpg" title="That's just an eagle.">Eagle</span></li>
+        </ul>
+
+        <div id="imagewrapper">
+            <img id="placeholder" src="images/placeholder.gif" alt="my image gallery" />
+        </div>
+
+        <p id="description">Choose an image.</p>
+
+        <footer>
+            <p>William Bowden</p>
+            <p>For IGME-230 Web Site Design & Implementation</p>
+        </footer>
+
+    </section>
+    
+    <script>
+
+        let image = document.querySelector("div").querySelector("img");
+        let spans = document.querySelectorAll("span");
+        let description = document.querySelector("#description");
+        let current = 0;
+                
+        let grabPicture = (e) => 
+        {   
+            // if there is a current selected, reset the color on it
+            if(current){
+                current.style.color = "#c60";
+            }
+            
+            // set new current and update the color
+            current = e.target;
+            current.style.color = "#dc0";
+            
+            // set image and description
+            image.src = "images/" + current.dataset.image;
+            description.innerHTML = current.title;            
+        };
+        
+        for(let span of spans){
+            span.addEventListener("click", grabPicture);
+        }
+
+    </script>
+	   
+</body>
+</html>

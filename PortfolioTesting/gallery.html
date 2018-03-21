@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Image Gallery</title>
+    
+<style>
+    
+    #mainImage{
+/*
+        margin-left: 25%;
+        margin-right: 25%;
+*/
+        padding: 10px;
+    }
+    
+    #mainImage img{
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    
+    #thumbnails{
+        margin-left: 12.5%;
+    }
+    
+    #thumbnails img{
+        width: 20%;
+    }
+    
+    img{
+        border: solid 1px darkgrey;
+    }
+    
+</style>
+
+<body>
+    
+    <div id="thumbnails">
+    
+        <img src="images/cassie.jpg">
+        <img src="images/eagle.jpg">
+        <img src="images/seal.jpg">
+        <img src="images/wolf.jpg">
+        
+    </div>
+    
+    <div id="mainImage">
+    
+        <img src="">
+        
+    </div>
+
+    <script>
+        
+        let mainImage = document.querySelector("#mainImage").querySelector("img");
+        let thumbnails = document.querySelector("#thumbnails").querySelectorAll("img");
+        
+        let current = thumbnails[0];
+        current.style.opacity = 0.5;
+        
+        mainImage.src = current.src; 
+        
+        let changeMain = (e) => 
+        {   
+            // if there is a current selected, reset the opacity on it
+            if(current){
+                current.style.opacity = "1";
+            }
+            
+            // set new current and update the opacity
+            current = e.target;
+            current.style.opacity = "0.5";
+            
+            // set image
+            mainImage.src = current.src;       
+        };
+        
+        for(let thumbnail of thumbnails){
+            thumbnail.addEventListener("mouseover", changeMain);
+        }
+    
+    </script>
+    
+</body>
+    
+</html>
