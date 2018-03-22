@@ -3,54 +3,9 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    
     <title>Image Gallery</title>
-    
-<style>
-    
-    #mainImage{
-        padding: 10px;
-    }
-    
-    #mainImage img{
-        width: 40%;
-        margin-left: 30%;
-        margin-right: 30%;
-    }
-    
-    #thumbnails{
-        margin-left: 25%;
-    }
-    
-    #thumbnails img{
-        width: 15%;
-    }
-    
-    img{
-        border: solid 1px darkgrey;
-    }
-    
-    @media only screen and (max-width: 750px) {
-        
-        #mainImage{
-            padding: 10px;
-        }
-
-        #mainImage img{
-            width: 60%;
-            margin-left: 20%;
-            margin-right: 20%;
-        }
-
-        #thumbnails{
-            margin-left: 18%;
-        }
-
-        #thumbnails img{
-            width: 18.5%;
-        }
-    }
-    
-</style>
 
 <body>
     
@@ -58,10 +13,14 @@
     
         <div id="thumbnails">
     
+            <div class="button" id="previous">previous</div>
+
             <img src="images/cassie.jpg">
             <img src="images/eagle.jpg">
             <img src="images/seal.jpg">
             <img src="images/wolf.jpg">
+            
+            <p class="button" id="next">next</p>
 
         </div>
 
@@ -78,8 +37,13 @@
         let mainImage = document.querySelector("#mainImage").querySelector("img");
         let thumbnails = document.querySelector("#thumbnails").querySelectorAll("img");
         
+        let index = 0;
+        let allImages = ["images/cassie.jpg", "images/eagle.jpg", "images/seal.jpg", "images/wolf.jpg"];
+        let nextBtn = document.querySelector("#next");
+        let prevBtn = document.querySelector("#previous");
+        
         let current = thumbnails[0];
-        current.style.opacity = 0.3;
+        current.style.opacity = "0.3";
         
         mainImage.src = current.src; 
         
@@ -97,6 +61,48 @@
             // set image
             mainImage.src = current.src;       
         };
+        
+        let nextThumbs = (e) => 
+        {   
+            index++;
+            
+            if(index == allImages.length){
+                index = 0;
+            }
+            
+            for(let i = 0; i < thumbnails.length; i++){
+                let thisIndex = index + i;
+                if(thisIndex >= allImages.length){
+                    thisIndex -= allImages.length;
+                }
+                thumbnails[i].src = allImages[thisIndex];
+            }
+            
+            mainImage.src = current.src;
+        };
+        
+        let prevThumbs = (e) => 
+        {   
+            index--;
+            
+            if(index < 0){
+                index = allImages.length-1;
+            }
+            
+            for(let i = 0; i < thumbnails.length; i++){
+                let thisIndex = index - i;
+                if(thisIndex < 0){
+                    thisIndex += allImages.length;
+                }
+                thumbnails[i].src = allImages[thisIndex];
+            } 
+            
+            mainImage.src = current.src;
+            
+        };
+        
+        nextBtn.addEventListener("click", nextThumbs);
+        prevBtn.addEventListener("click", prevThumbs);
         
         for(let thumbnail of thumbnails){
             thumbnail.addEventListener("mouseover", changeMain);
