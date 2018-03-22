@@ -1,0 +1,113 @@
+*{
+    font-family:verdana,tahoma,sans-serif;
+    border-radius : 5px;
+}
+
+header{
+    background: url(../images/cats.jpg);
+}
+
+header h1{
+    margin:0;
+    color:white;
+    border-radius : 5px;
+    text-shadow: 2px 2px black,
+                -1px 1px black,
+                -1px -1px black,
+                1px -1px black;
+    box-shadow : 3px 3px 10px rgba(0,0,0,.6);
+    text-align:center;
+    font-size:4em;
+    padding: 20px;
+}
+
+h2, div{
+    text-align: center;
+}
+
+.result {
+    position: relative;
+    width: 100px;
+    float:left;
+    box-shadow : 3px 3px 20px rgba(0,0,0,.3);
+/*    border: 1px solid #177EC8;*/
+    border-radius : 5px;
+    padding:5px;
+    margin:12px;
+}
+
+.result img {
+    left: 5px;
+    display:block;
+}
+
+.result img:hover {
+    opacity: 0.5;
+}
+
+.result p{
+    font-size:12px;
+    font-weight:bold;
+    bottom: 5px;
+}
+
+.result audio{
+    width: 130px;
+}
+
+#inputs{
+    background-color: #5498C8;
+    box-shadow : 3px 3px 10px rgba(0,0,0,.6);
+    padding: 20px;
+    border-radius : 5px;
+    margin: 5%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+#inputs *{
+    padding: 3px;
+    font-size: .8em;
+}
+
+#inputs input, #inputs select{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+button{
+    width: 120%;
+    height: 90%;
+    margin-left: 10px;
+    display : inline;
+    cursor : pointer;
+    border-style : solid;
+    border-radius : 10px;
+    box-shadow : 0 1px 4px rgba(0,0,0,.2);
+    font-weight : bold;
+    color : #fff;
+    text-shadow : 0 1px 3px rgba(0,0,0,.4);
+    font-family : sans-serif;
+    text-decoration : none;
+}
+
+button.blue{
+    border-color: #105688;
+    border: solid 0.5px #105688;
+    border-right: solid 2px #105688;
+    border-bottom: solid 3px #105688;
+    background: #177EC8;
+    background: linear-gradient(top, #8fc800 0%,#438c00 100%);
+}
+
+button:hover{
+    background: #1886D5;
+}
+
+button:active{
+    background: #105688;
+    box-shadow : 0 0 6px rgba(0,0,0,.6);
+}
+
+button:focus {outline:0;}   
