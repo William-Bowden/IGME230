@@ -10,20 +10,28 @@
 <body>
     
     <div id="imageGallery">
-    
+            
         <div id="thumbnails">
     
-            <div class="button" id="previous">previous</div>
-
-            <img src="images/cassie.jpg">
-            <img src="images/eagle.jpg">
-            <img src="images/seal.jpg">
-            <img src="images/wolf.jpg">
+            <div id="previous">
             
-            <p class="button" id="next">next</p>
+                <img src="images/leftArrow.png" class="button" >
+                
+            </div>
+            
+            <img src="images/placeholder.gif" class="thumbnail">
+            <img src="images/eagle.jpg" class="thumbnail">
+            <img src="images/seal.jpg" class="thumbnail">
+            <img src="images/wolf.jpg" class="thumbnail">
+         
+            <div  id="next">
+            
+                <img src="images/rightArrow.png" class="button" >
+
+            </div>
 
         </div>
-
+                
         <div id="mainImage">
 
             <img src="">
@@ -35,10 +43,10 @@
     <script>
         
         let mainImage = document.querySelector("#mainImage").querySelector("img");
-        let thumbnails = document.querySelector("#thumbnails").querySelectorAll("img");
+        let thumbnails = document.querySelector("#thumbnails").querySelectorAll(".thumbnail");
         
         let index = 0;
-        let allImages = ["images/cassie.jpg", "images/eagle.jpg", "images/seal.jpg", "images/wolf.jpg"];
+        let allImages = ["images/placeholder.gif", "images/eagle.jpg", "images/seal.jpg", "images/wolf.jpg","images/cassie.jpg", "images/eagle.jpg", "images/seal.jpg", "images/wolf.jpg","images/cassie.jpg", "images/eagle.jpg", "images/seal.jpg", "images/BlockBreaker.gif"];
         let nextBtn = document.querySelector("#next");
         let prevBtn = document.querySelector("#previous");
         
@@ -66,8 +74,9 @@
         {   
             index++;
             
-            if(index == allImages.length){
-                index = 0;
+            if(index >= allImages.length - (thumbnails.length -1)){
+                index--;
+                return;
             }
             
             for(let i = 0; i < thumbnails.length; i++){
@@ -85,14 +94,20 @@
         {   
             index--;
             
+            
             if(index < 0){
-                index = allImages.length-1;
+                index = 0;
+                return;
             }
             
+//            if(index < 0){
+//                index = allImages.length-1;
+//            }
+            
             for(let i = 0; i < thumbnails.length; i++){
-                let thisIndex = index - i;
-                if(thisIndex < 0){
-                    thisIndex += allImages.length;
+                let thisIndex = index + i;
+                if(thisIndex >= allImages.length){
+                    thisIndex -= allImages.length;
                 }
                 thumbnails[i].src = allImages[thisIndex];
             } 

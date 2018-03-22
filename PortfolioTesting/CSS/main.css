@@ -1,16 +1,16 @@
 .button{
-    background-color: skyblue;
-    border: solid 2px black;
-    text-align: center;
-    margin-right: 25%;
+/*    background-color: skyblue;*/
+    border: none;
+    max-width: 20px;
+    margin-top: 5%;
 }
 
 #previous{
-    
+
 }
 
 #next{
-    
+
 }
 
 #mainImage{
@@ -24,17 +24,27 @@
 }
 
 #thumbnails{
-    float: left;
-    margin-left: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-#thumbnails img{
+#thumbnails div{
+    padding: 30px;
+}
+
+.thumbnail{
     width: 15%;
 }
 
 img{
     border: solid 1px darkgrey;
 }
+
+#thumbnails div:hover{
+    background-color: lightgrey;
+}
+
 
 @media only screen and (max-width: 750px) {
 
@@ -48,11 +58,7 @@ img{
         margin-right: 20%;
     }
 
-    #thumbnails{
-        margin-left: 18%;
-    }
-
-    #thumbnails img{
+    .thumbnail{
         width: 18.5%;
     }
 }
