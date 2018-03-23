@@ -25,12 +25,16 @@ h2, div{
     text-align: center;
 }
 
+#content{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 .result {
     position: relative;
-    width: 100px;
     float:left;
     box-shadow : 3px 3px 20px rgba(0,0,0,.3);
-/*    border: 1px solid #177EC8;*/
+    border: 1px solid #177EC8;
     border-radius : 5px;
     padding:5px;
     margin:12px;
@@ -39,16 +43,14 @@ h2, div{
 .result img {
     left: 5px;
     display:block;
-}
-
-.result img:hover {
-    opacity: 0.5;
+    max-height: 250px;
 }
 
 .result p{
+    position: absolute;
     font-size:12px;
     font-weight:bold;
-    bottom: 5px;
+    bottom: 0px;
 }
 
 .result audio{
@@ -101,13 +103,41 @@ button.blue{
     background: linear-gradient(top, #8fc800 0%,#438c00 100%);
 }
 
-button:hover{
-    background: #1886D5;
-}
-
 button:active{
     background: #105688;
     box-shadow : 0 0 6px rgba(0,0,0,.6);
 }
 
-button:focus {outline:0;}   
+button:focus {outline:0;}
+
+button:hover{
+    background: #1886D5;
+}
+
+.result img:hover {
+    position: absolute;
+    animation: fadeIn 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    box-shadow : 0px 0px 50px rgba(0,0,0,1);
+    z-index: 9999;
+}
+
+@keyframes fadeIn {
+	0%{
+		opacity: 1;
+	}
+    
+    25%{
+        opacity: .6;
+    }
+
+	50%{
+		opacity: 0.5;
+	}
+    
+    100%{
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}

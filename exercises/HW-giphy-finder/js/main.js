@@ -41,35 +41,53 @@ function getData(){
 
 }
 
-  function jsonLoaded(obj){
-      if(!obj.data || obj.data.length == 0){
-          document.querySelector("#content").innerHtML = `<p><i>No results found for '${displayTerm}'</i></p>`;
-          $("#content").fadeIn(500);
-          return;
-      }
+function jsonLoaded(obj){
 
-      let results = obj.data;
+    let content = document.querySelector("#content");
 
-      let bigString = "<p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+    if(!obj.data || obj.data.length == 0){
+        content.innerHtML = `<p><i>No results found for '${displayTerm}'</i></p>`;
+        $("#content").fadeIn(500);
+        return;
+    }
 
-      for(let i = 0; i < results.length; i++){
-          let result = results[i];
+    let results = obj.data;
+    let size = document.querySelector("#size").value;
+    let width = 100;
 
-          let smallURL = result.images.fixed_width_small.url;
-          if(!smallURL) smallURL = "/images/no-image-found.png";
+    if(size == "fixed_width"){
+        width = 200;
+    }
+    let height = width + 75;
 
-          let url = result.url;
-          let rating = result.rating.toUpperCase();
-          
-          var line = `<span><a target='_blank' href='${url}'><div class='result'><img src='${smallURL}' title= '${result.id}' /></a></span>`;
-          line += `<p>Rating: '${rating}'</p></div>`;
+    let bigString = "<p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
 
-          bigString += line;
-      }
+    for(let i = 0; i < results.length; i++){
+        let result = results[i];
 
-      document.querySelector("#content").innerHTML = bigString;
+        let smallURL = 0;
 
-      $("#content").fadeIn(500);
+        if(size == "fixed_width_small"){
+            smallURL = result.images.fixed_width_small.url;
+        }
+        else{
+            smallURL = result.images.fixed_width.url;
+        }
+
+        if(!smallURL) smallURL = "/images/no-image-found.png";
+
+        let url = result.url;
+        let rating = result.rating.toUpperCase();
+
+        var line = `<div class='result' style='width:${width}px;height:${height}px;'><span><a target='_blank' href='${url}'><img src='${smallURL}' title= '${result.id}' /></a></span>`;
+        line += `<p>Rating: '${rating}'</p></div>`;
+
+        bigString += line;
+    }
+
+    document.querySelector("#content").innerHTML = bigString;
+
+    $("#content").fadeIn(500);
 
 
-  }
+}
