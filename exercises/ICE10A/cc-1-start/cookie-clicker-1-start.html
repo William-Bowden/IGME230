@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    
+<head>
+    
+	<meta charset="utf-8" />
+    
+	<title>Cookie Clicker!</title>
+    
+	<link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+    
+	<style>
+		body{
+			font-family: cookie;
+		}
+		
+		header div{
+			font-family: sans-serif;
+			font-size: .9em;
+		}
+		
+		#flexcontainer{
+			display: flex;
+			height: 70vh;
+			min-width: 700px;
+			min-height: 480px;
+		}
+        
+        #view{
+            border: solid black;
+            padding: .5em;
+            flex: 1;
+        }
+        
+        #controls{
+            border: solid black;
+            padding: 0.5em;
+            flex: 1;
+        }
+        
+        #cookieBtn{
+            background-image: url(images/perfectCookie.png);
+            width: 300px;
+            height: 300px;
+            background-size: 300px 300px;
+            border: 0;
+        }
+        #cookieBtn:hover{
+            box-shadow: 1px 1px 20px black;
+        }
+        #cookieBtn:active{
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+        #cookieBtn:focus{
+            outline: none;
+        }
+        
+        p{
+            font-size: 2em;
+            margin: 0.5em;
+        }
+        
+        #controls p{
+            border-bottom: 2px solid grey;
+            padding-bottom: 0.5em;
+        }
+		
+	</style>
+    
+</head>
+    
+<body>
+    
+    <header>
+
+        <h1>Cookie CLKR!</h1>
+
+        <div>How to play: 
+
+            <ul>
+                <li>Click the giant cookie to bake more cookies!</li>
+                <li>Grandma's give you more cookies per click!!</li>
+                <li>Farm's & Factory's give you more cookies per second!!!</li>
+            </ul>
+
+        </div>
+
+    </header>
+
+    <div id="flexcontainer">
+
+        <div id="view">
+
+            <p id="numCookiesLbl">Total Cookies: 0</p>
+            <p id="cookiesPerClickLbl">Cookies per click: 1</p>
+            <p id="cookiesPerSecLbl">Cookies per second: 0</p>
+            <button id="cookieBtn"></button>
+
+        </div>
+
+        <div id="controls">
+
+            <p>
+                <img src="images/grandma.png">
+                <button id="grandmaBtn">Buy Grandma - cost <span class="currentCookies">0</span>/<span class="grandmaPrice">25</span> Cookies</button>
+            </p>
+            <p>
+                <img src="images/farm.png">
+                <button id="farmBtn">Buy Farm - cost <span>0</span>/100 cookies</button>
+            </p>
+
+        </div>
+
+    </div>	
+
+    <script>
+
+        "use strict";
+        
+        let totalCookies = 0;
+        let cookiesPerClick = 100;
+        let cookiesPerSec = 1;
+        
+        let numGrandma = 0;
+        let pricePerGrandma = 25;
+        let inflationPerGrandma = 1.5;
+        const increasePerGrandma = 1;
+        
+        let numFarm = 0;
+        let pricePerFarm = 100;
+        let inflationPerFarm = 1.5;
+        const increasePerFarm = 1;
+        
+        let cookieBtn = document.querySelector("#cookieBtn");
+        let cookieNum = document.querySelector("#numCookiesLbl");
+        let cookiePerClick = document.querySelector("#cookiesPerClickLbl");
+        let cookiePerSec = document.querySelector("#cookiesPerSecLbl");
+        let currCookies = document.querySelector(".currentCookies");
+        let grandmaPrice = document.querySelector(".grandmaPrice");
+       
+        let grandmaBtn = document.querySelector("#grandmaBtn");
+        grandmaBtn.addEventListener("click", grandmaClicked);
+        
+        let farmBtn = document.querySelector("#farmBtn");
+        farmBtn.addEventListener("click", farmClicked);
+        
+        cookieBtn.addEventListener("click", cookieClicked);
+        cookieBtn.addEventListener("click", updateView);
+        
+        // call tick to start the loop
+        tick();
+        
+        function grandmaClicked(){
+            if(totalCookies < pricePerGrandma){
+                return;
+            }
+            
+            totalCookies -= pricePerGrandma;
+            numGrandma += 1;
+            cookiesPerClick += increasePerGrandma;
+            pricePerGrandma = Math.floor(pricePerGrandma * inflationPerGrandma);
+            
+            updateView();
+            
+        }
+        
+        function farmClicked(){
+            if(totalCookies < pricePerFarm){
+                return;
+            }
+            
+            totalCookies -= pricePerFarm;
+            numFarm += 1;
+            cookiePerSec += increasePerFarm;
+            pricePerFarm = Math.floor(pricePerFarm * inflationPerFarm);
+            
+            updateView();
+            
+        }
+        
+        function tick(){
+            setTimeout(tick, 1000);
+            console.log("tick");
+            totalCookies += cookiesPerSec;
+            updateView();
+        }
+        
+        function cookieClicked(){
+            totalCookies += cookiesPerClick;
+            updateView();
+        }
+        
+        function updateView(){
+            cookieNum.innerHTML = "Total cookies: " + totalCookies;
+            cookiePerClick.innerHTML = "Cookies per click: " + cookiesPerClick;
+            cookiePerSec.innerHTML = "Cookies per sec: " + cookiesPerSec;
+            currCookies.innerHTML = totalCookies;
+            grandmaPrice.innerHTML = pricePerGrandma;
+        }
+        
+        
+
+    </script>
+    
+</body>
+    
+</html>
