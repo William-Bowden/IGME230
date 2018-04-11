@@ -54,7 +54,7 @@
     // if we find a previously set color value, display it
     if (storedColor){
         colorSelect.querySelector(`option[value='${storedColor}']`).selected = true;
-        document.querySelector("body").style.backgroundColor = localStorage.getItem(colorKey);
+        document.body.style.backgroundColor = storedColor;
     }
 
     /* This stuff happens later when the user does something */
@@ -62,7 +62,7 @@
     nameField.onchange = e => { localStorage.setItem(nameKey, e.target.value); };
     colorSelect.onchange = e => { 
         localStorage.setItem(colorKey, e.target.value);
-        document.querySelector("body").style.backgroundColor = localStorage.getItem(colorKey);
+        document.body.style.backgroundColor = localStorage.getItem(colorKey);
     };
 
 
