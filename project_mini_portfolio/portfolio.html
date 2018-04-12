@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Billy Bowden</title>
+  <meta name="description" content="Developer Portfolio of William Bowden">
+  <meta name="author" content="William Bowden">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  
+   <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/lightbox.css">
+  
+  <!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="scripts/lightbox.js"></script>
+  	
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+<header class="main_nav accent1">
+	<div class="container">
+		<div class="twelve columns">
+			<div class="logo"><a href="#">William Bowden</a></div>
+		</div>
+	</div>
+</header>
+
+<div class="container main">
+	
+    <!-- Images used to open the lightbox -->
+    <div class="row">
+        
+        <div class="six columns">
+            
+            <h3>Title</h3>
+            
+            <img src="images/backpacker.jpg" onclick="openModal();currentSlide(1)" class="hover-shadow">
+        
+            <div class="row">
+            
+                <div class="three columns">
+                    <img src="images/backpacker.jpg" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                </div>
+
+                <div class="three columns">
+                    <img src="images/desert_cycle.jpg" onclick="openModal();currentSlide(2)" class="hover-shadow">
+                </div>
+
+                <div class="three columns">
+                    <img src="images/italy_bikes.jpg" onclick="openModal();currentSlide(3)" class="hover-shadow">
+                </div>
+
+                <div class="three columns">
+                    <img src="images/on_safari.jpg" onclick="openModal();currentSlide(4)" class="hover-shadow">
+                </div>
+            
+            </div>
+            
+        </div>
+        
+        <div class="six columns">
+            
+            <h3>Title</h3>
+            
+            <img src="images/backpacker.jpg" onclick="openModal();currentSlide(1)" class="hover-shadow">
+        
+            <div class="row">
+            
+                <div class="three columns">
+                    <img src="images/backpacker.jpg" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                </div>
+
+                <div class="three columns">
+                    <img src="images/desert_cycle.jpg" onclick="openModal();currentSlide(2)" class="hover-shadow">
+                </div>
+
+                <div class="three columns">
+                    <img src="images/italy_bikes.jpg" onclick="openModal();currentSlide(3)" class="hover-shadow">
+                </div>
+
+                <div class="three columns">
+                    <img src="images/on_safari.jpg" onclick="openModal();currentSlide(4)" class="hover-shadow">
+                </div>
+            
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <!-- The Modal/Lightbox -->
+    <div id="myModal" class="modal">
+        
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        
+        <div class="modal-content">
+
+            <div class="mySlides">
+                <div class="numbertext">1 / 4</div>
+                <img src="images/backpacker.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 4</div>
+                <img src="images/desert_cycle.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 4</div>
+                <img src="images/italy_bikes.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 4</div>
+                <img src="images/on_safari.jpg" style="width:100%">
+            </div>
+
+            <!-- Next/previous controls -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <!-- Caption text -->
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+
+            <!-- Thumbnail image controls -->
+            <div class="column">
+                <img class="demo" src="images/backpacker.jpg" onclick="currentSlide(1)" alt="This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. This is a description. ">
+            </div>
+
+            <div class="column">
+                <img class="demo" src="images/desert_cycle.jpg" onclick="currentSlide(2)" alt="Trolltunga">
+            </div>
+
+            <div class="column">
+                <img class="demo" src="images/italy_bikes.jpg" onclick="currentSlide(3)" alt="Mountains">
+            </div>
+
+            <div class="column">
+                <img class="demo" src="images/on_safari.jpg" onclick="currentSlide(4)" alt="Lights">
+            </div>
+            
+        </div>
+    </div> 
+    
+</div><!--Container-->
+
+<div class="row accent1">
+	<div class="container">
+		<div class="four columns">
+			<img class="avatar" src="images/amy.jpg" />
+		</div>
+		<div class="six columns">
+			<h2 class="bio">About Me</h2>
+			<p class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sun</p>
+		</div>
+        <div class="row two columns">
+			<ul class="social">
+			<li class="facebook"><a href="#"><i class="fa fa-facebook-square fa-lg"></i></a></li>
+			<li class="twitter"><a href="#"><i class="fa fa-twitter-square fa-lg"></i></a></li>
+			<li class="linkedin"><a href="#"><i class="fa fa-linkedin-square fa-lg"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</div><!--Row accent1-->
+	
+<footer>
+	<div class="container">
+		
+		<div class="row twelve columns">
+			<p class="copyright">&copy; 2018 William Bowden </p>
+		</div>
+	</div>
+</footer>
+    
+</body>
+</html>
