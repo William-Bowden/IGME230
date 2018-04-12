@@ -4,37 +4,38 @@
 
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Billy Bowden</title>
-  <meta name="description" content="Developer Portfolio of William Bowden">
-  <meta name="author" content="William Bowden">
+    <meta charset="utf-8">
+    <title>Billy Bowden</title>
+    <meta name="description" content="Developer Portfolio of William Bowden">
+    <meta name="author" content="William Bowden">
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-  
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
    <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/magnific-popup.css">
-  <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/lightbox.css">
   
   <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="scripts/lightbox.js"></script>
+    <script src="scripts/elements.js"></script>
   	
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
 <body>
@@ -84,24 +85,24 @@
             
             <h3>Tower Defense</h3>
             
-            <img src="images/TD/TurretPlacement.gif" onclick="openModal();currentSlide(1)" class="hover-shadow">
+            <img src="images/TD/TurretPlacement.gif" onclick="openModal();currentSlide(5)" class="hover-shadow">
         
             <div class="row">
             
                 <div class="three columns">
-                    <img src="images/TD/TurretPlacement.gif" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                    <img src="images/TD/TurretPlacement.gif" onclick="openModal();currentSlide(5)" class="hover-shadow">
                 </div>
 
                 <div class="three columns">
-                    <img src="images/TD/Gameplay.PNG" onclick="openModal();currentSlide(2)" class="hover-shadow">
+                    <img src="images/TD/Gameplay.PNG" onclick="openModal();currentSlide(6)" class="hover-shadow">
                 </div>
 
                 <div class="three columns">
-                    <img src="images/TD/Scene.PNG" onclick="openModal();currentSlide(3)" class="hover-shadow">
+                    <img src="images/TD/Scene.PNG" onclick="openModal();currentSlide(7)" class="hover-shadow">
                 </div>
 
                 <div class="three columns">
-                    <img src="images/TD/Turrets_1.png" onclick="openModal();currentSlide(4)" class="hover-shadow">
+                    <img src="images/TD/Turrets_1.png" onclick="openModal();currentSlide(8)" class="hover-shadow">
                 </div>
             
             </div>
@@ -111,30 +112,86 @@
     </div>
 
     <!-- The Modal/Lightbox -->
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal asteroid">
         
         <span class="close cursor" onclick="closeModal()">&times;</span>
         
         <div class="modal-content">
 
-            <div class="mySlides">
+            <div class="mySlides asteroids">
                 <div class="numbertext">1 / 4</div>
                 <img src="images/Asteroids/asteroids.gif" style="width:100%">
             </div>
 
-            <div class="mySlides">
+            <div class="mySlides asteroids">
                 <div class="numbertext">2 / 4</div>
                 <img src="images/Asteroids/Death.jpg" style="width:100%">
             </div>
 
-            <div class="mySlides">
+            <div class="mySlides asteroids">
                 <div class="numbertext">3 / 4</div>
                 <img src="images/Asteroids/GameOver.jpg" style="width:100%">
             </div>
 
-            <div class="mySlides">
+            <div class="mySlides asteroids">
                 <div class="numbertext">4 / 4</div>
                 <img src="images/Asteroids/Gameplay.jpg" style="width:100%">
+            </div>
+
+            <!-- Next/previous controls -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <!-- Caption text -->
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+
+            <!-- Thumbnail image controls -->
+            <div class="column">
+                <img class="demo" src="images/Asteroids/asteroids.gif" onclick="currentSlide(1)" alt="Simple gif of some gameplay">
+            </div>
+
+            <div class="column">
+                <img class="demo" src="images/Asteroids/Death.jpg" onclick="currentSlide(2)" alt="A simple particle system explosion for player collisions">
+            </div>
+
+            <div class="column">
+                <img class="demo" src="images/Asteroids/GameOver.jpg" onclick="currentSlide(3)" alt="Game Over Screen">
+            </div>
+
+            <div class="column">
+                <img class="demo" src="images/Asteroids/Gameplay.jpg" onclick="currentSlide(4)" alt="Asteroids the game">
+            </div>
+            
+        </div>
+    </div> 
+    
+    <!-- The Modal/Lightbox -->
+    <div id="myModal" class="modal tdm">
+        
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        
+        <div class="modal-content">
+            
+            <div class="mySlides td">
+                <div class="numbertext">1 / 4</div>
+                <img src="images/TD/TurretPlacement.gif" style="width:100%">
+            </div>
+
+            <div class="mySlides td">
+                <div class="numbertext">2 / 4</div>
+                <img src="images/TD/Gameplay.PNG" style="width:100%">
+            </div>
+
+            <div class="mySlides td">
+                <div class="numbertext">3 / 4</div>
+                <img src="images/TD/Scene.PNG" style="width:100%">
+            </div>
+
+            <div class="mySlides td">
+                <div class="numbertext">4 / 4</div>
+                <img src="images/TD/Turrets_1.png" style="width:100%">
             </div>
 
             <!-- Next/previous controls -->
@@ -171,7 +228,7 @@
 <div class="row accent1">
 	<div class="container">
 		<div class="four columns">
-			<img class="avatar" src="images/amy.jpg" />
+			<img class="avatar" src="images/Asteroids/Gameplay.jpg" />
 		</div>
 		<div class="six columns">
 			<h2 class="bio">About Me</h2>

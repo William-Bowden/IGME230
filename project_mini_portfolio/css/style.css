@@ -38,16 +38,13 @@ header.main_nav{
 .logo{
 	margin: 15% auto;
 	text-align: center;
+    font-family: 'Share Tech Mono', monospace;
 }
 .logo a{
 	font-size: 3em;
 	color: #fff;
 	text-decoration: none;
-	border: 5px solid #fff;
-    border-top: none;
-    border-bottom: none;
-	text-transform: uppercase;
-	padding: 2px 10px 0 10px;
+	border-right: 3px solid #505050;
 	margin: 0;
 }
 .logo a:hover{
