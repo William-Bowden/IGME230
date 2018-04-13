@@ -7,7 +7,7 @@ window.onload = (e) => {
 
 // acts as an update function, updating the game timer
 function tick(){
-    setTimeout(tick, 750);
+    setTimeout(tick, 525);
     
     if(title.style.borderColor == "rgb(255, 255, 255)"){
         title.style.borderColor = "";
