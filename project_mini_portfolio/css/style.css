@@ -47,10 +47,6 @@ header.main_nav{
 	border-right: 3px solid #505050;
 	margin: 0;
 }
-.logo a:hover{
-	background-color: #fff;
-	color: #505050;
-}
 /* Images & Media
 –––––––––––––––––––––––––––––––––––––––––––––– */
 img{max-width: 100%;}
@@ -58,7 +54,6 @@ img.avatar{
 	border-radius: 400px;
 	border: 5px solid #fff;
 }
-img:hover{opacity:0.8;}
 
 /* Footer
 –––––––––––––––––––––––––––––––––––––––––––––– */

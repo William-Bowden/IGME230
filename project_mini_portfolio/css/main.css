@@ -1,0 +1,72 @@
+.button{
+    background-color: skyblue;
+    border: none;
+    max-width: 20px;
+}
+
+.previous{
+
+}
+
+.next{
+
+}
+
+.mainImage{
+/*    padding: 10px;*/
+}
+
+.mainImage img{
+/*
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+*/
+}
+
+.thumbnails{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.thumbnails div{
+    padding: 2.5px 10px;
+    margin-top: 4.5%;
+    margin-bottom: 4.5%;
+}
+
+.thumbnail{
+/*    width: 15%;*/
+    margin: 0px;
+}
+
+img{
+    border: solid 1px darkgrey;
+}
+
+.thumbnails div:hover{
+    background-color: lightgrey;
+}
+
+.thumbnails div:active{
+    background-color: grey;
+}
+
+
+@media only screen and (max-width: 750px) {
+
+    .mainImage{
+        padding: 10px;
+    }
+
+    .mainImage img{
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .thumbnail{
+/*        width: 18.5%;*/
+    }
+}

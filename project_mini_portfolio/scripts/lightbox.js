@@ -21,31 +21,37 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
-  let i;
-  let slides = document.querySelectorAll(".mySlides");
-  let dots = document.querySelectorAll(".demo");
-  let captionText = document.querySelector("#caption");
-        
-    let currentImgs;
+    let i;
+    let slides = document.querySelectorAll(".mySlides");
+    let dots = document.querySelectorAll(".demo");
+    let captionText = document.querySelector("#caption");
+
+    let imgs = document.querySelectorAll(".imgHere");
+    let currentImgs = [];
+    
+    if (n > (slides.length * (imgGroup+1))) {slideIndex = 1}
+
+    if (n < 1) {slideIndex -= slides.length}
+    
+    let imgGroup = Math.ceil(n/slides.length) - 1;
+
+    console.log(imgGroup);
+    
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
     
     for(let j = 0; j < slides.length; j++){
-        currentImgs += slides[j].querySelector("img").src;
-        console.log(currentImgs);
+        currentImgs.push(imgs[j + (imgGroup * slides.length)].querySelector("img").src);
+        console.log(slides[j].querySelector("img").src);
+        slides[j].querySelector("img").src = currentImgs[j + (imgGroup * slides.length)];
     }
-        
-  if (n > slides.length) {slideIndex = 1}
-    
-  if (n < 1) {slideIndex = slides.length}
-    
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-    
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
+
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    captionText.innerHTML = dots[slideIndex-1].alt;
 }
