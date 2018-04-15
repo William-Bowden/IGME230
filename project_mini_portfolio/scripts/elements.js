@@ -4,13 +4,9 @@ window.onload = (e) => {
     title = document.querySelector(".logo").firstChild;
     tick();
     
-    mainImage = document.querySelector("#asteroidsMain").querySelector("img");
-    thumbnails = document.querySelector(".thumbnails").querySelectorAll(".thumbnail");
+    thumbnails = document.querySelectorAll(".thumbnail");
     current = thumbnails[0];
-    current.style.opacity = "0.3";
-    mainImage.src = current.src;     
-    
-    console.log(thumbnails);
+    current.style.opacity = "0.7";
     
     for(let thumbnail of thumbnails){
         thumbnail.addEventListener("mouseover", changeMain);

@@ -4,35 +4,38 @@
 
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Billy Bowden</title>
-  <meta name="description" content="Developer Portfolio of William Bowden">
-  <meta name="author" content="William Bowden">
+    <meta charset="utf-8">
+    <title>Billy Bowden</title>
+    <meta name="description" content="Developer Portfolio of William Bowden">
+    <meta name="author" content="William Bowden">
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-  
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
    <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/main.css">
   
   <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="scripts/imageGallery.js"></script>
+    <script src="scripts/elements.js"></script>
   	
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
 <body>
@@ -41,66 +44,157 @@
 	<div class="container">
 		<div class="twelve columns">
 			<div class="logo"><a href="#">William Bowden</a></div>
+            <h5 style="text-align: center">Developer</h5>
 		</div>
 	</div>
 </header>
 
 <div class="container main">
-	<div class="row">
-		<div class="six columns container">
-            <h4>Title</h4>
-			<a class="image-link" href="images/backpacker.jpg"><img src="images/backpacker.jpg" /></a>
-            <p class="row">This is some filler text that will be a short description of the game that is thumbmnailed above.</p>
-		</div>
-		<div class="six columns portfolio">
-            <h4>Title</h4>
-			<a class="image-link" href="images/desert_cycle.jpg"><img src="images/desert_cycle.jpg" /></a>
-            <p>This is some filler text that will be a short description of the game that is thumbmnailed above.</p>
-		</div>
-	</div>
 	
-	<div class="row">
-		<div class="six columns portfolio">
-            <h4>Title</h4>
-			<a class="image-link" href="images/on_safari.jpg"><img src="images/on_safari.jpg" /></a>
-            <p>This is some filler text that will be a short description of the game that is thumbmnailed above.</p>
-		</div>
-		<div class="six columns portfolio">
-            <h4>Title</h4>
-			<a class="image-link" href="images/overlook_mtn.jpg"><img src="images/overlook_mtn.jpg" /></a>
-            <p>This is some filler text that will be a short description of the game that is thumbmnailed above.</p>
-		</div>
-	</div>
-	
-	<div class="row" style="margin-bottom: 10%;">
-		<div class="six columns portfolio">
-            <h4>Title</h4>
-			<a class="image-link" href="images/single_rider.jpg"><img src="images/single_rider.jpg" /></a>
-            <p>This is some filler text that will be a short description of the game that is thumbmnailed above.</p>
-		</div>
-		<div class="six columns portfolio">
-            <h4>Title</h4>
-			<a class="image-link" href="images/sunset_beach.jpg"><img src="images/sunset_beach.jpg" /></a>
-            <p>This is some filler text that will be a short description of the game that is thumbmnailed above.</p>
-		</div>
-	</div>	
+    <div class="row">
+        
+        <div class="six columns">
+            
+            <h3>Tower Defense</h3>
+            
+            <div class="imageGallery">
+                 
+                 <div class="mainImage td" id="tdMain">
+
+                    <img src="images/TD/TurretPlacement.gif">
+
+                </div>
+            
+                <div class="thumbnails">
+
+                    <img src="images/TD/TurretPlacement.gif" class="td thumbnail three columns">
+                    <img src="images/TD/Gameplay.PNG" class="td thumbnail three columns">
+                    <img src="images/TD/Scene.PNG" class="td thumbnail three columns">
+                    <img src="images/TD/Turrets_1.png" class="td thumbnail three columns">
+
+                </div>
+                
+                <p>
+                    <em>Tower Defense</em> is a game I made while teaching myself the ropes of the Unity3D engine. It is a simple Tower Defense game where you earn currency by killing enemies to purchase and place turrets to help further defend the path to your base from the incoming waves of enemies.
+                </p>
+
+            </div>
+            
+        </div>
+        
+        <div class="six columns">
+            
+            <h3>Nav Mesh Demo</h3>
+            
+            <div class="imageGallery">
+                 
+                 <div class="mainImage nav" id="navMain">
+
+                    <img src="images/NavMesh/Nav1.gif">
+
+                </div>
+            
+                <div class="thumbnails">
+
+                    <img src="images/NavMesh/Nav1.gif" class="nav thumbnail three columns">
+                    <img src="images/NavMesh/Nav2.gif" class="nav thumbnail three columns">
+                    <img src="images/NavMesh/Nav3.gif" class="nav thumbnail three columns">
+                    <img src="images/NavMesh/nav4.png" class="nav thumbnail three columns">
+
+                </div>
+                
+                <p>
+                    This footage is from a demo I made when teaching myself how to implement Unity2D's nav meshes with a simple point and click movement system. I also learned how the Character Controller that belongs to the Unity Standard Assets package vastly simplifies movement animation on humanoid models. 
+                </p>
+
+            </div>
+            
+        </div>
+                
+    </div>
+    
+    <div class="row">
+        
+        <div class="six columns">
+            
+            <h3>Asteroids</h3>
+            
+             <div class="imageGallery">
+                 
+                 <div class="mainImage asteroids" id="asteroidsMain">
+
+                    <img src="images/Asteroids/asteroids.gif">
+
+                </div>
+            
+                <div class="thumbnails">
+
+                    <img src="images/Asteroids/asteroids.gif" class="asteroids thumbnail three columns">
+                    <img src="images/Asteroids/Death.jpg" class="asteroids thumbnail three columns">
+                    <img src="images/Asteroids/GameOver.jpg" class="asteroids thumbnail three columns">
+                    <img src="images/Asteroids/Gameplay.jpg" class="asteroids thumbnail three columns">
+
+                </div>
+                 
+                 <p>
+                    Over the course of a couple of days I created <em>Asteroids</em>, which was a game directly influenced by the original <em>Asteroids</em>. It was, yet again, a learning experience because it was the first time I have ever worked with the concept of <em>object pooling</em>.
+                </p>
+
+            </div>
+            
+        </div>
+    
+        <div class="six columns">
+            
+            <h3>Quote Matcher</h3>
+            
+             <div class="imageGallery">
+                 
+                 <div class="mainImage qm" id="qmMain">
+
+                    <img src="images/QuoteMatcher/start.PNG">
+
+                </div>
+            
+                <div class="thumbnails">
+
+                    <img src="images/QuoteMatcher/start.PNG" class="qm thumbnail three columns">
+                    <img src="images/QuoteMatcher/correct.PNG" class="qm thumbnail three columns">
+                    <img src="images/QuoteMatcher/narrow.PNG" class="qm thumbnail three columns">
+                    <img src="images/QuoteMatcher/wrong.PNG" class="qm thumbnail three columns">
+
+                </div>
+                 
+                 <p>
+                    <a href="https://people.rit.edu/wjb5377/230/project2/" target="_blank"><em>Quote Matcher: The Office</em></a> is a simple DOM game made with HTML, CSS, and Javascript by another student and I where you are given random character quotes from the show The Office and are asked to guess who said that quote.
+                </p>
+
+            </div>
+            
+        </div>
+        
+    </div>
+
+    
+        
 </div><!--Container-->
 
 <div class="row accent1">
 	<div class="container">
 		<div class="four columns">
-			<img class="avatar" src="images/amy.jpg" />
+			<img class="avatar" src="images/ProfileImage.JPG" />
 		</div>
 		<div class="six columns">
 			<h2 class="bio">About Me</h2>
-			<p class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sun</p>
+			<p class="bio">I am a Junior at Rochester Institute of Technology majoring in Game Design & Development. I strongly enjoy using the Unity3D engine for game development with C#. Upon recently learning the basics of Web Development, I have a new appreciation as well as an enjoyment for it. Outside of programming/development, I am a hockey fan and a bit of a hockey player.</p>
 		</div>
         <div class="row two columns">
 			<ul class="social">
-			<li class="facebook"><a href="#"><i class="fa fa-facebook-square fa-lg"></i></a></li>
-			<li class="twitter"><a href="#"><i class="fa fa-twitter-square fa-lg"></i></a></li>
-			<li class="linkedin"><a href="#"><i class="fa fa-linkedin-square fa-lg"></i></a></li>
+                <li class="facebook"><a href="https://www.facebook.com/billy.bowden.79" target="_blank"><i class="fa fa-facebook-square fa-lg"></i></a></li>
+                <li class="twitter"><a href="https://twitter.com/BillyB0wden" target="_blank"><i class="fa fa-twitter-square fa-lg"></i></a></li>
+                <li class="linkedin"><a href="https://www.linkedin.com/in/william-bowden/" target="_blank"><i class="fa fa-linkedin-square fa-lg"></i></a></li>
 			</ul>
+            <a href="William_Bowden_Resume.pdf" target="_blank" style="text-align: center"><h5 id="resume">Resume<h5></a>
 		</div>
 	</div>
 </div><!--Row accent1-->
@@ -113,31 +207,6 @@
 		</div>
 	</div>
 </footer>
-	
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="scripts/jquery.magnific-popup.js"></script>
-  <script type="text/javascript">
-	 $('.image-link').magnificPopup({ 
-  type: 'image',
-  mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-
-  zoom: {
-    enabled: true, // By default it's false, so don't forget to enable it
-
-    duration: 300, // duration of the effect, in milliseconds
-    easing: 'ease-in-out', // CSS transition easing function 
-
-    // The "opener" function should return the element from which popup will be zoomed in
-    // and to which popup will be scaled down
-    // By defailt it looks for an image tag:
-    opener: function(openerElement) {
-      // openerElement is the element on which popup was initialized, in this case its <a> tag
-      // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-      return openerElement.is('img') ? openerElement : openerElement.find('img');
-    }
-  }
-
-});	</script>
+    
 </body>
 </html>

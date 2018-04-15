@@ -1,27 +1,5 @@
-.button{
-    background-color: skyblue;
-    border: none;
-    max-width: 20px;
-}
-
-.previous{
-
-}
-
-.next{
-
-}
-
 .mainImage{
-/*    padding: 10px;*/
-}
-
-.mainImage img{
-/*
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
-*/
+    padding: 15px;
 }
 
 .thumbnails{
@@ -37,8 +15,7 @@
 }
 
 .thumbnail{
-/*    width: 15%;*/
-    margin: 0px;
+    margin: 3px;
 }
 
 img{
@@ -53,6 +30,16 @@ img{
     background-color: grey;
 }
 
+.imageGallery{
+        box-shadow: 5px 5px 50px #000;
+
+}
+
+.imageGallery p{
+    text-align: center;
+    padding: 20px;
+}
+
 
 @media only screen and (max-width: 750px) {
 
@@ -65,8 +52,10 @@ img{
         margin-left: 20%;
         margin-right: 20%;
     }
-
-    .thumbnail{
-/*        width: 18.5%;*/
+    
+    
+    
+    .mainImage{
+        margin-bottom: 0px;
     }
 }
