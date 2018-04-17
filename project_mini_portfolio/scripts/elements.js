@@ -18,7 +18,7 @@ function tick(){
     setTimeout(tick, 525);
     
     if(title.style.borderColor == "rgb(255, 255, 255)"){
-        title.style.borderColor = "";
+        title.style.borderColor = "rgba(255, 255, 255, 0)";
     }
     else{
         title.style.borderColor = "rgb(255, 255, 255)";
