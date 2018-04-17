@@ -74,10 +74,10 @@ function createLabelsAndButtons(){
     
     // 1 set up 'startScene'
     // 1A - make the top start label
-    let startLabel1 = new PXI.Text("Circle Blast!");
-    startLabel1.style = new Pixi.TextStyle({
+    let startLabel1 = new PIXI.Text("Circle Blast!");
+    startLabel1.style = new PIXI.TextStyle({
         fill: 0xFFFFFF,
-        fontSize: 96,
+        fontSize: 84,
         fontFamily: "Verdana",
         stroke: 0xFF0000,
         strokeThickness: 6
@@ -86,11 +86,11 @@ function createLabelsAndButtons(){
     startLabel1.y = 120;
     startScene.addChild(startLabel1);
     
-    //1C - make the start game button
-    let startLabel2 = new PXI.Text("Are you worthy?");
-    startLabel2.style = new Pixi.TextStyle({
+    //1B - make the middle start label
+    let startLabel2 = new PIXI.Text("Are you worthy?");
+    startLabel2.style = new PIXI.TextStyle({
         fill: 0xFFFFFF,
-        fontSize: 32,
+        fontSize: 28,
         fontFamily: "Verdana",
         fontStyle: "italic",
         stroke: 0xFF0000,
@@ -100,10 +100,10 @@ function createLabelsAndButtons(){
     startLabel2.y = 300;
     startScene.addChild(startLabel2);
     
-    //1B - make the middle start label
-    let startButton = new PXI.Text("Start!");
+    //1C - make the start game button
+    let startButton = new PIXI.Text("Start!");
     startButton.style = buttonStyle;
-    startButton.x = 80;
+    startButton.x = 225;
     startButton.y = sceneHeight - 100;
     startButton.interactive = true;
     startButton.buttonMode = true;
@@ -114,7 +114,47 @@ function createLabelsAndButtons(){
     
     
     
+    // 2 - set up 'gameScene'
+    let textStyle = new PIXI.TextStyle({
+        fill: 0xFFFFFF,
+        fontSize: 18,
+        fontFamily: "Verdana",
+        stroke: 0xFF0000,
+        strokeThickness: 4
+    });
+    
+    // 2A - make score label
+    scoreLabel = new PIXI.Text();
+    scoreLabel.style = textStyle;
+    scoreLabel.x = 5;
+    scoreLabel.y = 5;
+    gameScene.addChild(scoreLabel);
+    increaseScoreBy(0);
+    
+    // 2B - make life label
+    lifeLabel = new PIXI.Text();
+    lifeLabel.style = textStyle;
+    lifeLabel.x = 5;
+    lifeLabel.y = 26;
+    gameScene.addChild(lifeLabel);
+    decreaseLifeBy(0);
+    
 }
+
+function startGame(){
+    console.log("Game Started");
+    startScene.visible = false;
+    gameOverScene.visible = false;
+    gameScene.visible = true;
+}
+
+function increaseScoreBy(value){
+    score += value;
+    life = parseUInt(life);
+    lifeLabel.text = `Life    ${life}%`;
+}
+
+
 
 
 
