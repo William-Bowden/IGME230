@@ -200,7 +200,6 @@ function createLabelsAndButtons(){
 }
 
 function startGame(){
-    console.log("Game Started");
     startScene.visible = false;
     gameOverScene.visible = false;
     gameScene.visible = true;
@@ -211,6 +210,7 @@ function startGame(){
 	decreaseLifeBy(0);
 	ship.x = 300;
 	ship.y = 550;
+    bulletsPerShot = 1;
 	loadLevel();
 }
 
@@ -314,60 +314,6 @@ function gameLoop(){
 	
 }
 
-function end(){
-	paused = true;
-	
-	// clear out the level
-	circles.forEach(c => gameScene.removeChild(c));
-	circles = [];
-	
-	bullets.forEach(b => gameScene.removeChild(b));
-	bullets = [];
-	
-	explosions.forEach(e => gameScene.removeChild(e));
-	explosions = [];
-	
-	gameOverScoreLabel.text = `Score ${score}`;
-	
-	gameOverScene.visible = true;
-	gameScene.visible = false;
-}
-
-function loadLevel(){
-	if(levelNum > 1){
-	   bulletsPerShot = 3;
-	}
-	
-	createCircles(levelNum * 5);
-	paused = false;
-}
-
-function loadSpriteSheet(){
-	let spriteSheet = PIXI.BaseTexture.fromImage("images/explosions.png");
-	let width = 64;
-	let height = 64;
-	let numFrames = 16;
-	let textures = [];
-	
-	for(let i = 0; i < numFrames; i++){
-		let frame = new PIXI.Texture(spriteSheet, new PIXI.Rectangle(i * width, 64, width, height));
-		textures.push(frame);
-	}
-	
-	return textures;
-}
-
-function increaseScoreBy(value){
-    score += value;
-    scoreLabel.text = `Score ${score}`;
-}
-
-function decreaseLifeBy(value){
-    life -= value;
-    life = parseInt(life);
-    lifeLabel.text = `Life    ${life}%`;
-}
-
 function createCircles(numCircles){
 	for(let i = 0; i < numCircles; i++){
 		let c = new Circle(10, 0xFFFF00);
@@ -392,18 +338,79 @@ function createExplosion(x, y, frameWidth, frameHeight){
 	expl.play();
 }
 
+function decreaseLifeBy(value){
+    life -= value;
+    life = parseInt(life);
+    lifeLabel.text = `Life    ${life}%`;
+}
+
+
+function end(){
+	paused = true;
+	
+	// clear out the level
+	circles.forEach(c => gameScene.removeChild(c));
+	circles = [];
+	
+	bullets.forEach(b => gameScene.removeChild(b));
+	bullets = [];
+	
+	explosions.forEach(e => gameScene.removeChild(e));
+	explosions = [];
+	
+	gameOverScoreLabel.text = `Score ${score}`;
+	
+	gameOverScene.visible = true;
+	gameScene.visible = false;
+}
+
 function fireBullet(e){
 	if(paused)
 		return;
 	
-	let offset = 5;
+	let offset = 10;
+    let b;
+    
+    if(bulletsPerShot == 1){
+        offset = 0;
+    }
 	
-	for(let i = 0; i < bulletsPerShot; i++){
-		let b = new Bullet(0xFFFFFF, ship.x + (offset * i), ship.y);
-		bullets.push(b);
-		gameScene.addChild(b);
-	}
+    for(let i = 0; i < bulletsPerShot; i++){
+        b = new Bullet(0xFFFFFF, ship.x + (offset * i) - offset, ship.y);
+        bullets.push(b);
+        gameScene.addChild(b);
+    }
 	
 	shootSound.play();
+}
+
+function increaseScoreBy(value){
+    score += value;
+    scoreLabel.text = `Score ${score}`;
+}
+
+
+function loadLevel(){
+	if(levelNum > 1){
+	   bulletsPerShot = 3;
+	}
+	
+	createCircles(levelNum * 5);
+	paused = false;
+}
+
+function loadSpriteSheet(){
+	let spriteSheet = PIXI.BaseTexture.fromImage("images/explosions.png");
+	let width = 64;
+	let height = 64;
+	let numFrames = 16;
+	let textures = [];
+	
+	for(let i = 0; i < numFrames; i++){
+		let frame = new PIXI.Texture(spriteSheet, new PIXI.Rectangle(i * width, 64, width, height));
+		textures.push(frame);
+	}
+	
+	return textures;
 }
 
