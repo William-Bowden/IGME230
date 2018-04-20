@@ -1,8 +1,7 @@
 // We will use `strict mode`, which helps us by having the browser catch many common JS mistakes
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 "use strict";
-const app = new PIXI.Application(600,600);
-document.body.appendChild(app.view);
+const app = new PIXI.Application(800,700);
 
 // constants
 const sceneWidth = app.view.width;
@@ -33,51 +32,180 @@ let levelNum = 1;
 let paused = true;
 
 function setup() {
-	stage = app.stage;
-// #1 - Create the `start` scene
-	startScene = new PIXI.Container();
-    stage.addChild(startScene);
     
-// #2 - Create the main `game` scene and make it invisible
-    gameScene = new PIXI.Container();
-    gameScene.visible = false;
-    stage.addChild(gameScene);
+    //
+    // Basket of verlet constraints
+    //
+    Physics(function (world) {
+
+        // bounds of the window
+        var viewportBounds = Physics.aabb(0, 0, window.innerWidth, window.innerHeight)
+            ,edgeBounce
+            ,renderer
+            ;
+
+        // create a renderer
+        renderer = Physics.renderer('pixi', {
+            el: 'viewport'
+        });
+
+        // add the renderer
+        world.add(renderer);
+        // render on each step
+        world.on('step', function () {
+            world.render();
+        });
+
+        // constrain objects to these bounds
+        edgeBounce = Physics.behavior('edge-collision-detection', {
+            aabb: viewportBounds
+            ,restitution: 0.2
+            ,cof: 0.8
+        });
+
+        // resize events
+        window.addEventListener('resize', function () {
+
+            // as of 0.7.0 the renderer will auto resize... so we just take the values from the renderer
+            viewportBounds = Physics.aabb(0, 0, renderer.width, renderer.height);
+            // update the boundaries
+            edgeBounce.setAABB(viewportBounds);
+
+        }, true);
+
+        // for constraints
+        var rigidConstraints = Physics.behavior('verlet-constraints', {
+            iterations: 6
+        });
+
+        // the "basket"
+        var basket = [];
+        for ( var i = 200; i < Math.min(renderer.width - 200, 400); i += 5 ){
+
+            l = basket.push(
+                Physics.body('circle', {
+                    x: i
+                    ,y: renderer.height / 1.4 + (i/3)
+                    ,radius: 1
+                    ,restitution: 1
+                    ,mass: .5
+                    ,hidden: true
+                })
+            );
+
+            rigidConstraints.distanceConstraint( basket[ l - 1 ], basket[ l - 2 ], 2 );
+        }
+
+//        world.on('render', function( data ){
+//
+//            var renderer = data.renderer;
+//            for ( var i = 1, l = basket.length; i < l; ++i ){
+//
+//                renderer.drawLine(basket[ i - 1 ].state.pos, basket[ i ].state.pos, {
+//                    strokeStyle: '#cb4b16'
+//                    ,lineWidth: 3
+//                });
+//            }
+//        });
+
+        // fix the ends
+        basket[ 0 ].treatment = 'static';
+        basket[ l - 1 ].treatment = 'static';
+
+        basket[ 0 ].treatment = 'static';
+        basket[ l - 1 ].treatment = 'static';
+
+        // falling boxes
+        var boxes = [];
+        for ( var i = 0, l = 1; i < l; ++i ){
+
+            boxes.push( Physics.body('circle', {
+                radius: 40
+                ,x: 60 * (i % 6) + renderer.width / 2 - (180)
+                ,y: 60 * (i / 6 | 0) + 50
+                ,restitution: 0.9
+                ,angle: Math.random()
+                ,styles: {
+                    fillStyle: '#268bd2'
+                    ,angleIndicator: '#155479'
+                    ,strokeStyle: '#155479'
+                    ,lineWidth: 1
+                }
+            }));
+        }
+
+        world.add( basket );
+        world.add( boxes );
+        world.add( rigidConstraints );
+
+        // add things to the world
+        world.add([
+            Physics.behavior('interactive', { el: renderer.el })
+            ,Physics.behavior('constant-acceleration')
+            ,Physics.behavior('body-impulse-response')
+            ,Physics.behavior('body-collision-detection')
+            ,Physics.behavior('sweep-prune')
+            ,edgeBounce
+        ]);
+
+        // subscribe to ticker to advance the simulation
+        Physics.util.ticker.on(function( time ) {
+            world.step( time );
+        });
+    });
+
     
-// #3 - Create the `gameOver` scene and make it invisible
-	gameOverScene = new PIXI.Container();
-    gameOverScene.visible = false;
-    stage.addChild(gameOverScene);
     
-// #4 - Create labels for all 3 scenes
-	createLabelsAndButtons();
     
-// #5 - Create ship
-	ship = new Ship();
-	gameScene.addChild(ship);
-	
-// #6 - Load Sounds
-	shootSound = new Howl({
-		src: ['sounds/shoot.wav']
-	});
-	
-	hitSound = new Howl({
-		src: ['sounds/hit.mp3']
-	});
-	
-	fireballSound = new Howl({
-		src: ['sounds/fireball.mp3']
-	});
-	
-// #7 - Load sprite sheet
-	explosionTextures = loadSpriteSheet();
-	
-// #8 - Start update loop
-	app.ticker.add(gameLoop);
-	
-// #9 - Start listening for click events on the canvas
-	bulletsPerShot = 1;
-	app.view.onclick = fireBullet;
-	
+    
+    
+
+    
+//	stage = app.stage;
+//// #1 - Create the `start` scene
+//	startScene = new PIXI.Container();
+//    stage.addChild(startScene);
+//    
+//// #2 - Create the main `game` scene and make it invisible
+//    gameScene = new PIXI.Container();
+//    gameScene.visible = false;
+//    stage.addChild(gameScene);
+//    
+//// #3 - Create the `gameOver` scene and make it invisible
+//	gameOverScene = new PIXI.Container();
+//    gameOverScene.visible = false;
+//    stage.addChild(gameOverScene);
+//    
+//// #4 - Create labels for all 3 scenes
+//	createLabelsAndButtons();
+//    
+//// #5 - Create ship
+//	ship = new Ship();
+//	gameScene.addChild(ship);
+//	
+//// #6 - Load Sounds
+//	shootSound = new Howl({
+//		src: ['sounds/shoot.wav']
+//	});
+//	
+//	hitSound = new Howl({
+//		src: ['sounds/hit.mp3']
+//	});
+//	
+//	fireballSound = new Howl({
+//		src: ['sounds/fireball.mp3']
+//	});
+//	
+//// #7 - Load sprite sheet
+//	explosionTextures = loadSpriteSheet();
+//	
+//// #8 - Start update loop
+//	app.ticker.add(gameLoop);
+//	
+//// #9 - Start listening for click events on the canvas
+//	bulletsPerShot = 1;
+//	app.view.onclick = fireBullet;
+//	
 // Now our `startScene` is visible
 // Clicking the button calls startGame()
 }
