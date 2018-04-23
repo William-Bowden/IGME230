@@ -19,18 +19,11 @@ let stage;
 
 // game variables
 let startScene;
-let gameScene, ship, scoreLabel, gameOverScoreLabel, lifeLabel;
+let gameScene, player, scoreLabel, gameOverScoreLabel, lifeLabel, levelNum;
 let gameOverScene;
-let movement = {"x": 0, "y": 0};
 
-let circles = [];
-let bullets = [];
-let aliens = [];
-let explosions = [];
-let explosionTextures;
 let score = 0;
 let life = 100;
-let levelNum = 1;
 let paused = true;
 
 function setup() {
@@ -53,8 +46,8 @@ function setup() {
 	createLabelsAndButtons();
     
 // #5 - Create character
-	ship = new Ship();
-	gameScene.addChild(ship);
+	player = new Player();
+	gameScene.addChild(player);
 	
 // #8 - Start update loop
 	app.ticker.add(gameLoop);
@@ -123,7 +116,6 @@ function createLabelsAndButtons(){
     scoreLabel.x = 5;
     scoreLabel.y = 5;
     gameScene.addChild(scoreLabel);
-    increaseScoreBy(0);
     
     // 2B - make life label
     lifeLabel = new PIXI.Text();
@@ -184,9 +176,8 @@ function startGame(){
 	levelNum = 1;
 	score = 0;
 	life = 100;
-	increaseScoreBy(0);
-	ship.x = 300;
-	ship.y = 550;
+	player.x = 300;
+	player.y = 550;
 	loadLevel();
 }
 
@@ -199,20 +190,20 @@ function gameLoop(){
 		deltaTime = 1/12;
 	}
 	
-// #2 - Move Ship
+// #2 - Move player
 	movement = {"x": 0, "y": 0};
     	
 	let amount = 6 * deltaTime;
 	
 	// linear interpolation
-	let newX = lerp(ship.x, mousePos.x, amount);
-	let newY = lerp(ship.y, mousePos.y, amount);
+	let newX = lerp(player.x, mousePos.x, amount);
+	let newY = lerp(player.y, mousePos.y, amount);
 	
-	// clamp the ship to the screen
-	let w2 = ship.width/2;
-	let h2 = ship.height/2;
-	ship.x = clamp(newX, 0 + w2, sceneWidth - w2);
-	ship.y = clamp(newY, 0 + h2, sceneHeight - h2);
+	// clamp the player to the screen
+	let w2 = player.width/2;
+	let h2 = player.height/2;
+	player.x = clamp(newX, 0 + w2, sceneWidth - w2);
+	player.y = clamp(newY, 0 + h2, sceneHeight - h2);
 	
 // #5 - Check for Collisions
 	
@@ -227,12 +218,6 @@ function end(){
 	gameOverScene.visible = true;
 	gameScene.visible = false;
 }
-
-function increaseScoreBy(value){
-    score += value;
-    scoreLabel.text = `Score ${score}`;
-}
-
 
 function loadLevel(){
 	paused = false;
