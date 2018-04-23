@@ -6,11 +6,13 @@ class Avatar extends PIXI.Graphics{
 		this.y = y;
 		this.speed = speed;
 		this.beginFill(color);
+		this.lineStyle(2,0x000000,1);
 		this.drawCircle(0,0,radius);
 		this.endFill();
 		
 		// other properties
 		this.isGrounded = false;
+		this.ignorePlatforms = false;
 		this.dx = 0; // per second
 		this.dy = 0; // per second
 	}
@@ -61,6 +63,7 @@ class Platform extends PIXI.Graphics{
 		this.x = x;
 		this.y = y;
 		this.beginFill(color);
+		this.lineStyle(2,0x000000,1);
 		this.drawRect(x, y, width, height);
 		this.endFill();
 	}
