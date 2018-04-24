@@ -7,49 +7,36 @@ add(["media/Key.png"]).
 on("progress",e=>{console.log(`progress=${e.progress}`)}).
 load(setup);
 
-
+let sceneWidth = app.view.width;
+let sceneHeight = app.view.height;
 let player;
 	
 let platforms = [];
+let walls = [];
 let currentPlatforms = [];
 let key;
 
 function setup() {
-    player = new Avatar(10,0x00FF00,300,200);
+    player = new Avatar(10,0x00FF00, 0, sceneHeight);
 	app.stage.addChild(player);
 	
-	
-	//Math.ceil((Math.random()*10) /3)
-	for(let i = 0; i < 2; i++ ){
-		newPlat = platforms[Math.floor(Math.random() * platforms.size)];
-		
-		// if that platform is already in the current platforms, try for a new platform
-		for(let j = 0; j < currentPlatforms.length; j++){
-			if(currentPlatforms[j] == newPlat){
-				console.log("Platform already in currentPlatforms");
-				i--;
-				continue;
-			}
-		}
-		// otherwise, add the new platform
-		currentPlatforms.push();
-
-	}
-	
-	let platform1 = new Platform(100, 10, 0x476CAD, 100, 150, true);
+	let platform1 = new Platform(100, 20, 0x476CAD, 100, 150, true);
 	app.stage.addChild(platform1);
-	
-	let platform2 = new Platform(100, 10, 0x476CAD, 200, 100);
+	platforms.push(platform1);
+
+	let platform2 = new Platform(100, 20, 0x476CAD, 200, 100);
 	app.stage.addChild(platform2);
-    
-//    key = new Key(100, 100);
+	platforms.push(platform2);
+
+	let wall1 = new Platform(100, 20, 0xFF0000, 40, 60);
+	app.stage.addChild(wall1);
+	walls.push(wall1);
+	
     key = new Key();
     key.x = 100;
     key.y = 100;
 	app.stage.addChild(key);
 	
-	platforms.push(platform1);
-	platforms.push(platform2);
 	
 	app.renderer.backgroundColor = 0x5d5d5d;
 
@@ -83,12 +70,12 @@ function setup() {
 		}
 		
 		// #3 - move avatar
-		player.update(dt, app.view.width, app.view.height);
+		player.update(dt, sceneWidth, sceneHeight);
 		
         
         for(let i = 0; i < platforms.length; i++){
             if(platforms[i].moving){
-                platforms[i].update(dt, app.view.width, app.view.height);
+                platforms[i].update(dt, sceneWidth, sceneHeight);
             }
 		}
         
@@ -97,6 +84,9 @@ function setup() {
 		// #4 Check collisions
 		for(let i = 0; i < platforms.length; i++){
 			if(rectsIntersect(player, platforms[i]) && !player.ignorePlatforms){
+				
+				// bounce "animation"
+				player.collide(player.dy * dt);
 				
 				// keep above platform 
 				player.y -= 0.6;
@@ -109,6 +99,26 @@ function setup() {
 				// move with the platform
 				player.x += platforms[i].dx * dt;
 				player.y += platforms[i].dy * dt;
+			}
+		}
+		
+		for(let i = 0; i < walls.length; i++){
+			if(rectsIntersect(player, walls[i])){
+				
+				console.log("Player Y = " + player.y);
+				console.log("Wall Y = " + walls[i].y);
+				
+				// bounce "animation"
+				player.collide(player.dy * dt);
+				
+				// bounce
+				player.dy = -player.dy/2;
+				
+				player.isGrounded = true;
+				
+				// move with the platform
+				player.x += walls[i].dx * dt;
+				player.y += walls[i].dy * dt;
 			}
 		}
         

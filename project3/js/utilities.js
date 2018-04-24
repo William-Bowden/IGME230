@@ -43,3 +43,15 @@
 	function getRandom(min, max) {
 		return Math.random() * (max - min) + min;
 	}
+
+	function getOutVector(a, b){
+		let ax = a.x;
+		let ay = a.y;
+		let bx = b.x;
+		let by = b.y;
+		
+		let xMagnitude = ax - bx;
+		let yMagnitude = ay - by;
+	
+		return {x:xMagnitude, y:yMagnitude};
+	}

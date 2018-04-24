@@ -15,6 +15,10 @@ class Avatar extends PIXI.Graphics{
 		this.ignorePlatforms = false;
 		this.dx = 0; // per second
 		this.dy = 0; // per second
+		this.currentWidth = this.width;
+		this.currentHeight = this.height;
+		this.maxWidth = this.width;
+		this.maxHeight = this.height;
 	}
 	
 	update(dt, sceneWidth, sceneHeight){
@@ -22,6 +26,16 @@ class Avatar extends PIXI.Graphics{
 		// movement
 		this.x += this.dx * dt;
 		this.y += this.dy * dt;
+		
+		this.width -= (Math.abs(this.dy * dt)/2);
+		this.height -= (Math.abs(this.dx * dt)/2);
+		
+		this.width += 1;
+		this.height += 1;
+		
+		this.width = clamp(this.width, 15, this.maxWidth);
+		this.height = clamp(this.height, 15, this.maxHeight);
+		
 
 		// contain within the playspace
 		this.x = clamp(this.x, this.radius, sceneWidth - this.radius);
@@ -29,13 +43,18 @@ class Avatar extends PIXI.Graphics{
 		
 		// wall bounce
 		if( this.x == sceneWidth - this.radius || this.x == this.radius ){
+			this.collide(-Math.abs(this.dx * dt));
+
 			this.dx = -this.dx;
+
 		}
 		
 		// floor/ceiling bounce
 		if( this.y == sceneHeight - this.radius || this.y == this.radius ){
+			this.collide(Math.abs(this.dy * dt));
+
 			this.dy = -this.dy/2;
-			
+						
 			if(this.isGrounded){
 			   this.dy = 0;
 		   	}
@@ -57,6 +76,17 @@ class Avatar extends PIXI.Graphics{
 		
 		
 	}
+	
+	collide(force){
+		
+//		force = force * 2;
+//		
+//		force = clamp(force, 0, 30);
+		
+		this.height -= force;
+		this.width += force;
+	}
+	
 }
 
 class Platform extends PIXI.Graphics{
