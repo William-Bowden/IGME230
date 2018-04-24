@@ -1,13 +1,21 @@
 const app = new PIXI.Application(600,500);
 document.querySelector("#gameWindow").appendChild(app.view); 
+
+// pre-load the images
+PIXI.loader.
+add(["media/Key.png"]).
+on("progress",e=>{console.log(`progress=${e.progress}`)}).
+load(setup);
+
+
 let player;
 	
 let platforms = [];
 let currentPlatforms = [];
+let key;
 
-
-window.onload = ()=>{
-	player = new Avatar(10,0x00FF00,300,200);
+function setup() {
+    player = new Avatar(10,0x00FF00,300,200);
 	app.stage.addChild(player);
 	
 	
@@ -28,11 +36,17 @@ window.onload = ()=>{
 
 	}
 	
-	let platform1 = new Platform(100, 10, 0x476CAD, 100, 150);
+	let platform1 = new Platform(100, 10, 0x476CAD, 100, 150, true);
 	app.stage.addChild(platform1);
 	
 	let platform2 = new Platform(100, 10, 0x476CAD, 200, 100);
 	app.stage.addChild(platform2);
+    
+//    key = new Key(100, 100);
+    key = new Key();
+    key.x = 100;
+    key.y = 100;
+	app.stage.addChild(key);
 	
 	platforms.push(platform1);
 	platforms.push(platform2);
@@ -71,6 +85,15 @@ window.onload = ()=>{
 		// #3 - move avatar
 		player.update(dt, app.view.width, app.view.height);
 		
+        
+        for(let i = 0; i < platforms.length; i++){
+            if(platforms[i].moving){
+                platforms[i].update(dt, app.view.width, app.view.height);
+            }
+		}
+        
+        
+        
 		// #4 Check collisions
 		for(let i = 0; i < platforms.length; i++){
 			if(rectsIntersect(player, platforms[i]) && !player.ignorePlatforms){
@@ -80,7 +103,16 @@ window.onload = ()=>{
 				player.isGrounded = true;
 			}
 		}
+        
+        if(rectsIntersect(player, key)){
+            console.log("Key Touched");
+            key.x += 30;
+            
+            
+            //create new platforms
+        }
+        
 	
 	});
 	
-} // end window.onload
+}

@@ -1,3 +1,7 @@
+*{
+    font-family: monospace;
+}
+
 #current{
     background-color: #B5D0FF;
     color: black;
@@ -132,6 +136,9 @@ h3:first-of-type {
 }
 h4{
     font-family: monospace;
+    font-size: 1.2em;
+    text-decoration-line: underline;
+    margin-left: 5%;
 }
 #largeframe p{
 	font-family: monospace;

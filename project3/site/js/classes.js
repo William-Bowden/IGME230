@@ -58,7 +58,7 @@ class Avatar extends PIXI.Graphics{
 }
 
 class Platform extends PIXI.Graphics{
-	constructor(width=100, height=10, color=0x476CAD, x=0, y=0){
+	constructor(width=100, height=10, color=0x476CAD, x=0, y=0, moving=false){
 		super();
 		this.x = x;
 		this.y = y;
@@ -66,5 +66,31 @@ class Platform extends PIXI.Graphics{
 		this.lineStyle(2,0x000000,1);
 		this.drawRect(x, y, width, height);
 		this.endFill();
+        
+        this.moving = moving;
+        this.speed = 100;
+	}
+    
+    update(dt, sceneWidth, sceneHeight){
+
+		if(this.moving){
+            this.x += this.speed * dt;
+            this.x = clamp(this.x, this.width, sceneWidth - this.width);
+
+            if(this.x >= sceneWidth || this.x <= -this.width){
+               this.speed = -this.speed;
+            }
+        }
+        
+	}
+}
+
+class Key extends PIXI.Sprite{
+    constructor(x = 0, y = 0){
+		super(PIXI.loader.resources["media/Key.png"].texture);
+		this.anchor.set(0.5, 0.5);
+		this.scale.set(0.1);
+		this.x = x;
+		this.y = y;
 	}
 }
