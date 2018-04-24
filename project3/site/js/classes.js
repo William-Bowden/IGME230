@@ -19,10 +19,11 @@ class Avatar extends PIXI.Graphics{
 	
 	update(dt, sceneWidth, sceneHeight){
 		
-
+		// movement
 		this.x += this.dx * dt;
 		this.y += this.dy * dt;
 
+		// contain within the playspace
 		this.x = clamp(this.x, this.radius, sceneWidth - this.radius);
 		this.y = clamp(this.y, this.radius, sceneHeight - this.radius);
 		
@@ -41,6 +42,7 @@ class Avatar extends PIXI.Graphics{
 			
 		}
 		else{
+			// "gravity"
 			this.dy += 9.81;
 		}
 		
@@ -68,17 +70,29 @@ class Platform extends PIXI.Graphics{
 		this.endFill();
         
         this.moving = moving;
-        this.speed = 100;
+        this.dx = 0;
+        this.dy = 0;
+		
+		if(moving){
+			this.dx = 100;
+			this.dy = 50;
+		}
 	}
     
     update(dt, sceneWidth, sceneHeight){
 
 		if(this.moving){
-            this.x += this.speed * dt;
-            this.x = clamp(this.x, this.width, sceneWidth - this.width);
-
-            if(this.x >= sceneWidth || this.x <= -this.width){
-               this.speed = -this.speed;
+            this.x += this.dx * dt;
+            this.y += this.dy * dt;
+			
+			// reverse x direction
+            if(this.x >= sceneWidth-(this.width*2) || this.x <= -this.width){
+               this.dx = -this.dx;
+            }
+			
+			// reverse y direction
+			if(this.y > sceneHeight - 200 || this.y < 20){
+               this.dy = -this.dy;
             }
         }
         

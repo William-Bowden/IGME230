@@ -97,10 +97,18 @@ function setup() {
 		// #4 Check collisions
 		for(let i = 0; i < platforms.length; i++){
 			if(rectsIntersect(player, platforms[i]) && !player.ignorePlatforms){
+				
+				// keep above platform 
 				player.y -= 0.6;
 
+				// bounce
 				player.dy = -player.dy/2;
+				
 				player.isGrounded = true;
+				
+				// move with the platform
+				player.x += platforms[i].dx * dt;
+				player.y += platforms[i].dy * dt;
 			}
 		}
         
