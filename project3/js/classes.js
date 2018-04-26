@@ -1,5 +1,5 @@
 class Avatar extends PIXI.Graphics{
-	constructor(radius=10, color=0xFF0000, x=0, y=0,speed=5){
+	constructor(sounds, radius=10, color=0xFF0000, x=0, y=0, speed=5){
 		super();
 		this.radius = radius;
 		this.x = x;
@@ -19,6 +19,7 @@ class Avatar extends PIXI.Graphics{
 		this.maxWidth = this.width;
 		this.maxHeight = this.height;
 		this.maxSpeed = 600;
+		this.sounds = sounds;
 	}
 	
 	update(dt, sceneWidth, sceneHeight){
@@ -27,10 +28,12 @@ class Avatar extends PIXI.Graphics{
 		this.x += this.dx * dt;
 		this.y += this.dy * dt;
 		
+		// vertical stretch
 		if(Math.abs(this.dy) > Math.abs(this.dx)){
 			this.width -= (Math.abs(this.dy * dt)/2);
 			this.height += (Math.abs(this.dy * dt)/2);
 		}
+		// horizontal stretch
 		else{
 			this.height -= (Math.abs(this.dx * dt)/2);
 			this.width += (Math.abs(this.dx * dt)/2);
@@ -85,11 +88,20 @@ class Avatar extends PIXI.Graphics{
 		
 	}
 	
-	collide(force){		
+	collide(force){				
 		this.height -= force;
 		this.width += force;
+		
+		// check for being against the wall (too many sounds would play)
+		if(this.x != 0){
+			if( (Math.abs(player.dy)> 100 || Math.abs(player.dx) > 100) && player.isGrounded == false){
+				let index = Math.floor(getRandom(0,this.sounds.length));
+				this.sounds[index].play();
+			}
+		}
 	}
 	
+	// player death
 	die(){
 		this.lives -= 1;
 
@@ -98,8 +110,9 @@ class Avatar extends PIXI.Graphics{
 		}
 	}
 	
+	// reset player position
 	resetPos(){
-		this.x = 0;
+		this.x = 20;
 		this.y = sceneHeight - 50;
 
 		this.dx = 0;
@@ -147,11 +160,23 @@ class Platform extends PIXI.Graphics{
         }   
 	}
 	
-	relocate(){
-		this.x = Math.floor(getRandom(4, 10))*25;
-		this.y = Math.floor(getRandom(4, 10))*25;
-
-		this.y = clamp(this.y, 200, 0)
+	relocate(newX=0, newY=0){
+		
+		if(newX == 0){
+			this.x = Math.floor(getRandom(4, 10))*25;
+		}
+		else{
+			this.x = newX;
+		}
+		if(newY == 0){
+			this.y = Math.floor(getRandom(4, 10))*25;
+			this.y = clamp(this.y, 200, 0)
+		}
+		else{
+			this.y = newY;
+		}
+		
+		
 	}
 }
 

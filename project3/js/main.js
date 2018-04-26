@@ -9,8 +9,13 @@ load(setup);
 
 let sceneWidth = app.view.width;
 let sceneHeight = app.view.height;
+
+// Sounds
+let bounceSound1, bounceSound2, bounceSound3, bounceSound4, hitSound, pickupSound;
+let bounceSounds = [];
+
+// Objects
 let player;
-	
 let platforms = [];
 let walls = [];
 let hazards = [];
@@ -18,7 +23,7 @@ let currentPlatforms = [];
 let key;
 
 function setup() {
-    player = new Avatar(10,0x00FF00, 0, sceneHeight - 50);
+    player = new Avatar(bounceSounds, 10,0x00FF00, 20, sceneHeight - 50);
 	app.stage.addChild(player);
 	
 	// Platforms instantiation
@@ -55,8 +60,33 @@ function setup() {
     key.y = 100;
 	app.stage.addChild(key);
 	
-	setLevel();
+	// Load in sounds
+	bounceSound1 = new Howl({
+		src: ['sound/fx/Jump.wav']
+	});
+	bounceSounds.push(bounceSound1);
+	bounceSound2 = new Howl({
+		src: ['sound/fx/Jump2.wav']
+	});
+	bounceSounds.push(bounceSound2);
+	bounceSound3 = new Howl({
+		src: ['sound/fx/Jump3.wav']
+	});
+	bounceSounds.push(bounceSound3);
+	bounceSound4 = new Howl({
+		src: ['sound/fx/Jump4.wav']
+	});
+	bounceSounds.push(bounceSound4);
 	
+	hitSound = new Howl({
+		src: ['sound/fx/Damaged.wav']
+	});
+	
+	pickupSound = new Howl({
+		src: ['sound/fx/Pickup.wav']
+	});
+	
+	setLevel();
 	
 	app.renderer.backgroundColor = 0x5d5d5d;
 
@@ -107,7 +137,12 @@ function setup() {
 			if(rectsIntersect(player, platforms[i]) && !player.ignorePlatforms && platforms[i].isActive){
 				
 				// bounce "animation"
-				player.collide(player.dy * dt);
+				player.collide(player.dy * dt, bounceSounds);
+				
+//				if( player.dy > 100 && player.isGrounded == false){
+//					let index = Math.floor(getRandom(0,bounceSounds.length));
+//					bounceSounds[index].play();
+//				}
 				
 				// keep above platform 
 				player.y -= 0.6;
@@ -117,9 +152,11 @@ function setup() {
 				
 				player.isGrounded = true;
 				
-				// move with the platform
-				player.x += platforms[i].dx * dt;
-				player.y += platforms[i].dy * dt;
+				if(platforms[i].moving){
+					// move with the platform
+					player.x += platforms[i].dx * dt;
+					player.y += platforms[i].dy * dt;
+				}
 			}
 		}
 		
@@ -128,7 +165,7 @@ function setup() {
 			if(rectsIntersect(player, walls[i])){
 				
 				// bounce "animation"
-				player.collide(player.dy * dt);
+				player.collide(player.dy * dt, bounceSounds);
 				
 				// stop vertical movement
 				player.dy = 0;
@@ -140,10 +177,11 @@ function setup() {
 					player.isGrounded = true;
 				}
 				
-				// move with the platform
-				player.x += walls[i].dx * dt;
-				player.y += walls[i].dy * dt;
-				
+				if(platforms[i].moving){
+					// move with the platform
+					player.x += platforms[i].dx * dt;
+					player.y += platforms[i].dy * dt;
+				}
 			}
 		}
 		
@@ -219,6 +257,8 @@ function setLevel(){
 		}
 		
 		for(hazard of hazards){
+			hazard.relocate(0, 240);
+			
 			while(rectsIntersect(plat, hazard)){
 				plat.relocate();
 			}
@@ -231,17 +271,25 @@ function setLevel(){
 
 		plat.isActive = true;
 		app.stage.addChild(plat);
-
-		if(getRandom(0,10) < 2){
+		
+		let chanceX = getRandom(0,10);
+		let chanceY = getRandom(0,10);
+		
+		// chance of moving platform in x direction
+		if(chanceX < 3){
 			plat.moving = true;
-			plat.dx = getRandom(0,20) * 4;
-			plat.dy = getRandom(0,20) * 4;
+			// randomize speed between 6 intervals of 20
+			plat.dx = getRandom(0,5) * 20;
 		}
-
-	}
-	
-	for(hazard of hazards){
-		hazard.relocate();
+		else{
+			chanceY /= 2;
+		}
+		// chance of moving platform in y direction
+		if(chanceY < 3){
+			plat.moving = true;
+			// randomize speed between 6 intervals of 20
+			plat.dy = getRandom(0,5) * 20;
+		}
 	}
 	
 	for(plat of platforms){

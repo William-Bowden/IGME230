@@ -91,6 +91,25 @@
                     <li>Started 'Moving Platforms'</li>
                 
                 </ul>
+				
+				<h4>4/25</h4>
+                
+                <ul>
+                
+                    <li>Levels now progress</li>
+                    <li>Levels are now randomized</li>
+                    <li>Levels randomization values need to be tweaked due to some impossible map layouts</li>
+                
+                </ul>
+				
+				<h4>4/26</h4>
+                
+                <ul>
+                
+                    <li>Tweaked some randomization values, still needs work</li>
+                    <li>Started implementing sounds</li>
+                
+                </ul>
                 
                 <h3>Obstacles</h3>
 				
@@ -101,7 +120,10 @@
                 <h4>PhysicsJS was a Game Changer... literally</h4>
                 <p>The game was changed from <strong><em>Slinger</em></strong> to <strong><em>Blobby</em></strong> after encountering issues with integrating PixiJS with PhysicsJS. There were rendering issues that I couldn't solve on my own or find any documentation about. After spending a few hours over the course of a couple of days, the descision was made to alter the game. Without a physics engine, I was forced to change the game quite a bit. But I am more than happy with what the game is becoming and the feeling of what I've made, as there is still a "physics-y" feeling.</p>
                 
-                <h4>Obstacle 2</h4>
+                <h4>Running into a Wall</h4>
+				
+				<p>When implementing walls (red platforms), I encountered a problem where I couldn't get them to be <b>solid</b>; the player could get through them sometimes. I tried everything. When I finally thought I had the solution, which at the time was just adding a vector to the player position that represented the movement from the center of the wall to where the player would be if it were pushed "straight out" from the center of the wall from whereever the player was. But for some reason my coordinates were off? Let's say the wall's Y coordinate was 60. When my player was above the wall the Y should be less than that of the wall but was larger? My player sitting on top of the wall with a Y coordinate of 60, had a Y coordinate of ~110. It was the same when below the wall, my player was apparently at y = ~140. So rather than having the wall be a solid object, it acts the same as any other platform except when the player attempts to jump up through it, the game calculates the future position of the player if they were to jump. This calculation is then checked to see if the player would/wouldn't be colliding with the wall anymore and allows the player through accordingly.</p>
+				
                 <h4>Obstacle 3</h4>
                                
             </div>
