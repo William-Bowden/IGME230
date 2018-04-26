@@ -15,10 +15,10 @@ class Avatar extends PIXI.Graphics{
 		this.ignorePlatforms = false;
 		this.dx = 0; // per second
 		this.dy = 0; // per second
-		this.currentWidth = this.width;
-		this.currentHeight = this.height;
+		this.lives = 3;
 		this.maxWidth = this.width;
 		this.maxHeight = this.height;
+		this.maxSpeed = 600;
 	}
 	
 	update(dt, sceneWidth, sceneHeight){
@@ -27,15 +27,23 @@ class Avatar extends PIXI.Graphics{
 		this.x += this.dx * dt;
 		this.y += this.dy * dt;
 		
-		this.width -= (Math.abs(this.dy * dt)/2);
-		this.height -= (Math.abs(this.dx * dt)/2);
+		if(Math.abs(this.dy) > Math.abs(this.dx)){
+			this.width -= (Math.abs(this.dy * dt)/2);
+			this.height += (Math.abs(this.dy * dt)/2);
+		}
+		else{
+			this.height -= (Math.abs(this.dx * dt)/2);
+			this.width += (Math.abs(this.dx * dt)/2);
+		}
 		
 		this.width += 1;
 		this.height += 1;
 		
-		this.width = clamp(this.width, 15, this.maxWidth);
-		this.height = clamp(this.height, 15, this.maxHeight);
+		this.width = clamp(this.width, 12, this.maxWidth);
+		this.height = clamp(this.height, 12, this.maxHeight);
 		
+		this.dx = clamp(this.dx, -this.maxSpeed, this.maxSpeed);
+		this.dy = clamp(this.dy, -this.maxSpeed, this.maxSpeed);
 
 		// contain within the playspace
 		this.x = clamp(this.x, this.radius, sceneWidth - this.radius);
@@ -77,20 +85,31 @@ class Avatar extends PIXI.Graphics{
 		
 	}
 	
-	collide(force){
-		
-//		force = force * 2;
-//		
-//		force = clamp(force, 0, 30);
-		
+	collide(force){		
 		this.height -= force;
 		this.width += force;
+	}
+	
+	die(){
+		this.lives -= 1;
+
+		if(this.lives <= 0){
+			console.log("Ded");
+		}
+	}
+	
+	resetPos(){
+		this.x = 0;
+		this.y = sceneHeight - 50;
+
+		this.dx = 0;
+		this.dy = 0;
 	}
 	
 }
 
 class Platform extends PIXI.Graphics{
-	constructor(width=100, height=10, color=0x476CAD, x=0, y=0, moving=false){
+	constructor(width=100, height=10, color=0x476CAD, x=Math.floor(getRandom(4, 10))*25, y=Math.floor(getRandom(4, 10))*25, isActive=false, moving=false){
 		super();
 		this.x = x;
 		this.y = y;
@@ -99,11 +118,12 @@ class Platform extends PIXI.Graphics{
 		this.drawRect(x, y, width, height);
 		this.endFill();
         
+		this.isActive = isActive;
         this.moving = moving;
         this.dx = 0;
         this.dy = 0;
 		
-		if(moving){
+		if(this.moving && this.isActive){
 			this.dx = 100;
 			this.dy = 50;
 		}
@@ -124,8 +144,14 @@ class Platform extends PIXI.Graphics{
 			if(this.y > sceneHeight - 200 || this.y < 20){
                this.dy = -this.dy;
             }
-        }
-        
+        }   
+	}
+	
+	relocate(){
+		this.x = Math.floor(getRandom(4, 10))*25;
+		this.y = Math.floor(getRandom(4, 10))*25;
+
+		this.y = clamp(this.y, 200, 0)
 	}
 }
 
@@ -136,5 +162,12 @@ class Key extends PIXI.Sprite{
 		this.scale.set(0.1);
 		this.x = x;
 		this.y = y;
+	}
+	
+	randomPos(sceneWidth, sceneHeight){
+		// randomize x pos within screen width
+		this.x = getRandom(this.width, sceneWidth);
+		// randomize y pos within top half of the game screen
+		this.y = getRandom(this.height, sceneHeight/2);
 	}
 }

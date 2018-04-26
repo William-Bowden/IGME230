@@ -17,10 +17,16 @@
     }
     
     // bounding box collision detection - it compares PIXI.Rectangles
-	function rectsIntersect(a,b){
+//	function rectsIntersect(a,b){
+//		var ab = a.getBounds();
+//		var bb = b.getBounds();
+//		return ab.x + ab.width > bb.x && ab.x < bb.x + bb.width && ab.y + ab.height > bb.y && ab.y < bb.y + bb.height;
+//	}
+
+	function rectsIntersect(a,b,xOffset=0,yOffset=0){
 		var ab = a.getBounds();
 		var bb = b.getBounds();
-		return ab.x + ab.width > bb.x && ab.x < bb.x + bb.width && ab.y + ab.height > bb.y && ab.y < bb.y + bb.height;
+		return ab.x + ab.width - xOffset > bb.x && ab.x + xOffset < bb.x + bb.width && ab.y - yOffset + ab.height > bb.y && ab.y + yOffset < bb.y + bb.height;
 	}
 	
 	// these 2 helpers are used by classes.js

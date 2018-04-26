@@ -13,29 +13,49 @@ let player;
 	
 let platforms = [];
 let walls = [];
+let hazards = [];
 let currentPlatforms = [];
 let key;
 
 function setup() {
-    player = new Avatar(10,0x00FF00, 0, sceneHeight);
+    player = new Avatar(10,0x00FF00, 0, sceneHeight - 50);
 	app.stage.addChild(player);
 	
-	let platform1 = new Platform(100, 20, 0x476CAD, 100, 150, true);
-	app.stage.addChild(platform1);
-	platforms.push(platform1);
+	// Platforms instantiation
+	{
+		let platform1 = new Platform(100, 20, 0x476CAD);
+		platforms.push(platform1);
 
-	let platform2 = new Platform(100, 20, 0x476CAD, 200, 100);
-	app.stage.addChild(platform2);
-	platforms.push(platform2);
+		let platform2 = new Platform(100, 20, 0x476CAD);
+		platforms.push(platform2);
 
-	let wall1 = new Platform(100, 20, 0xFF0000, 40, 60);
-	app.stage.addChild(wall1);
-	walls.push(wall1);
+		let platform3 = new Platform(100, 20, 0x476CAD);
+		platforms.push(platform3);
+
+		let platform4 = new Platform(100, 20, 0x476CAD);
+		platforms.push(platform4);
+	}
+
+	// Walls instantiation
+	{
+		let wall1 = new Platform(100, 20, 0xFF0000, 40, sceneHeight - 400);
+		app.stage.addChild(wall1);
+		walls.push(wall1);
+	}
+	
+	// Hazards instantiation
+	{
+		let hazard1 = new Platform(50, 50, 0xFFFF00);
+		app.stage.addChild(hazard1);
+		hazards.push(hazard1);
+	}
 	
     key = new Key();
     key.x = 100;
     key.y = 100;
 	app.stage.addChild(key);
+	
+	setLevel();
 	
 	
 	app.renderer.backgroundColor = 0x5d5d5d;
@@ -82,8 +102,9 @@ function setup() {
         
         
 		// #4 Check collisions
+// PLATFORMS
 		for(let i = 0; i < platforms.length; i++){
-			if(rectsIntersect(player, platforms[i]) && !player.ignorePlatforms){
+			if(rectsIntersect(player, platforms[i]) && !player.ignorePlatforms && platforms[i].isActive){
 				
 				// bounce "animation"
 				player.collide(player.dy * dt);
@@ -102,35 +123,130 @@ function setup() {
 			}
 		}
 		
+// WALLS
 		for(let i = 0; i < walls.length; i++){
 			if(rectsIntersect(player, walls[i])){
-				
-				console.log("Player Y = " + player.y);
-				console.log("Wall Y = " + walls[i].y);
 				
 				// bounce "animation"
 				player.collide(player.dy * dt);
 				
-				// bounce
-				player.dy = -player.dy/2;
+				// stop vertical movement
+				player.dy = 0;
 				
-				player.isGrounded = true;
+				
+				// if the future player rectangle (one wall height further up than the current) is not colliding with the wall
+				if(!rectsIntersect(player, walls[i], 0, walls[i].height * (2/3))){
+					// allow jumping
+					player.isGrounded = true;
+				}
 				
 				// move with the platform
 				player.x += walls[i].dx * dt;
 				player.y += walls[i].dy * dt;
+				
+			}
+		}
+		
+// HAZARDS
+		for(let i = 0; i < hazards.length; i++){
+			if(rectsIntersect(player, hazards[i], 3, 3)){
+				
+				// reset position
+				player.resetPos();
+				player.die();
 			}
 		}
         
-        if(rectsIntersect(player, key)){
-            console.log("Key Touched");
-            key.x += 30;
-            
-            
-            //create new platforms
+// KEY
+        if(rectsIntersect(player, key)){           
+            setLevel();
         }
         
 	
 	});
 	
+}
+
+function setLevel(){
+	
+	player.resetPos();
+	key.randomPos(sceneWidth, sceneHeight);
+	
+	if(currentPlatforms.length > 0){
+		for(plat of currentPlatforms){
+			plat.isActive = false;
+			plat.moving = false;
+			plat.dx = 0;
+			plat.dy = 0;
+		}
+		
+		app.stage.removeChild(plat);
+		
+		currentPlatforms = [];
+	}
+
+	for(let i = 0; i < Math.floor(2,4); i++){
+
+		let plat = platforms[Math.round(getRandom(0, platforms.length-1))];
+
+		while(currentPlatforms.indexOf(plat) != -1){
+			plat = platforms[Math.floor(getRandom(0, platforms.length-1))];
+		}
+		
+		plat.relocate();
+		
+		for(wall of walls){
+			while(rectsIntersect(plat, wall)){
+				plat.relocate();
+			}
+			while(rectsIntersect(key, wall)){
+				key.randomPos(sceneWidth, sceneHeight);
+			}
+		}
+		
+		for(otherPlat of platforms){
+			if(plat == otherPlat){
+				continue;
+			}
+			else{
+				while(rectsIntersect(plat, otherPlat, 20, 20)){
+					plat.relocate();
+				}
+				while(rectsIntersect(key, plat, 10, 10)){
+					key.randomPos(sceneWidth, sceneHeight);
+				}
+			}
+		}
+		
+		for(hazard of hazards){
+			while(rectsIntersect(plat, hazard)){
+				plat.relocate();
+			}
+			while(rectsIntersect(key, hazard)){
+				key.randomPos(sceneWidth, sceneHeight);
+			}
+		}
+
+		currentPlatforms.push(plat);
+
+		plat.isActive = true;
+		app.stage.addChild(plat);
+
+		if(getRandom(0,10) < 2){
+			plat.moving = true;
+			plat.dx = getRandom(0,20) * 4;
+			plat.dy = getRandom(0,20) * 4;
+		}
+
+	}
+	
+	for(hazard of hazards){
+		hazard.relocate();
+	}
+	
+	for(plat of platforms){
+		if(!plat.isActive){
+			app.stage.removeChild(plat);
+		}
+	}
 }
