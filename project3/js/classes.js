@@ -94,7 +94,7 @@ class Avatar extends PIXI.Graphics{
 		
 		// check for being against the wall (too many sounds would play)
 		if(this.x != 0){
-			if( (Math.abs(player.dy)> 100 || Math.abs(player.dx) > 100) && player.isGrounded == false){
+			if( (Math.abs(player.dy)> 100 ) && player.isGrounded == false){
 				let index = Math.floor(getRandom(0,this.sounds.length));
 				this.sounds[index].play();
 			}

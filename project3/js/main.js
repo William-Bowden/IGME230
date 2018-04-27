@@ -11,7 +11,7 @@ let sceneWidth = app.view.width;
 let sceneHeight = app.view.height;
 
 // Sounds
-let bounceSound1, bounceSound2, bounceSound3, bounceSound4, hitSound, pickupSound;
+let music, bounceSound1, bounceSound2, bounceSound3, bounceSound4, hitSound, pickupSound;
 let bounceSounds = [];
 
 // Objects
@@ -61,6 +61,12 @@ function setup() {
 	app.stage.addChild(key);
 	
 	// Load in sounds
+	music = new Howl({
+		src: ['sound/music/adventure2.wav'],
+		autoplay: true,
+		loop: true
+	});
+	music.play();
 	bounceSound1 = new Howl({
 		src: ['sound/fx/Jump.wav']
 	});
@@ -139,11 +145,6 @@ function setup() {
 				// bounce "animation"
 				player.collide(player.dy * dt, bounceSounds);
 				
-//				if( player.dy > 100 && player.isGrounded == false){
-//					let index = Math.floor(getRandom(0,bounceSounds.length));
-//					bounceSounds[index].play();
-//				}
-				
 				// keep above platform 
 				player.y -= 0.6;
 
@@ -189,6 +190,8 @@ function setup() {
 		for(let i = 0; i < hazards.length; i++){
 			if(rectsIntersect(player, hazards[i], 3, 3)){
 				
+				hitSound.play();
+				
 				// reset position
 				player.resetPos();
 				player.die();
@@ -196,7 +199,8 @@ function setup() {
 		}
         
 // KEY
-        if(rectsIntersect(player, key)){           
+        if(rectsIntersect(player, key)){   
+			pickupSound.play();
             setLevel();
         }
         
