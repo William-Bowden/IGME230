@@ -20,9 +20,23 @@ class Avatar extends PIXI.Graphics{
 		this.maxHeight = this.height;
 		this.maxSpeed = 600;
 		this.sounds = sounds;
+		this.soundPlaying = false;
 	}
 	
 	update(dt, sceneWidth, sceneHeight){
+		
+		if(keys[keyboard.UP] && player.isGrounded) {
+			player.dy -= clamp(player.dy, 350, 350);
+			bounceSounds[Math.floor(getRandom(0,bounceSounds.length))].play();
+			this.soundPlaying = true;
+		}
+		if(this.dy < 0 || keys[keyboard.DOWN]){
+			this.ignorePlatforms = true;
+		}
+		
+		else{
+			this.ignorePlatforms = false;
+		}
 		
 		// movement
 		this.x += this.dx * dt;
@@ -85,7 +99,7 @@ class Avatar extends PIXI.Graphics{
 			this.isGrounded = false;
 		}
 		
-		
+		this.soundPlaying = false;
 	}
 	
 	collide(force){				
@@ -94,7 +108,7 @@ class Avatar extends PIXI.Graphics{
 		
 		// check for being against the wall (too many sounds would play)
 		if(this.x != 0){
-			if( (Math.abs(player.dy)> 100 ) && player.isGrounded == false){
+			if( (Math.abs(player.dy)> 100 ) && player.isGrounded == false && !this.soundPlaying){
 				let index = Math.floor(getRandom(0,this.sounds.length));
 				this.sounds[index].play();
 			}

@@ -53,11 +53,13 @@ function setup() {
 		let hazard1 = new Platform(50, 50, 0xFFFF00);
 		app.stage.addChild(hazard1);
 		hazards.push(hazard1);
+		
+		let hazard2 = new Platform(50, 50, 0xFFFF00);
+		app.stage.addChild(hazard2);
+		hazards.push(hazard2);
 	}
 	
-    key = new Key();
-    key.x = 100;
-    key.y = 100;
+    key = new Key(0,100);
 	app.stage.addChild(key);
 	
 	// Load in sounds
@@ -112,17 +114,6 @@ function setup() {
 			if(Math.abs(player.dx) < 1){
 			   player.dx = 0;
 			}
-		}
-		
-		if(keys[keyboard.UP] && player.isGrounded) {
-			player.dy -= clamp(player.dy, 350, 350);
-		}
-		
-		if(keys[keyboard.DOWN]) {
-			player.ignorePlatforms = true;
-		}
-		else{
-			player.ignorePlatforms = false;
 		}
 		
 		// #3 - move avatar
@@ -238,6 +229,7 @@ function setLevel(){
 		plat.relocate();
 		
 		for(wall of walls){
+			wall.relocate(0,1);
 			while(rectsIntersect(plat, wall)){
 				plat.relocate();
 			}
