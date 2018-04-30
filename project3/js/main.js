@@ -218,7 +218,7 @@ function setLevel(){
 		currentPlatforms = [];
 	}
 
-	for(let i = 0; i < Math.floor(2,4); i++){
+	for(let i = 0; i < Math.ceil(getRandom(2, platforms.length-1)); i++){
 
 		let plat = platforms[Math.round(getRandom(0, platforms.length-1))];
 

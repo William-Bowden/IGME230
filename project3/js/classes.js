@@ -176,15 +176,19 @@ class Platform extends PIXI.Graphics{
 	
 	relocate(newX=0, newY=0){
 		
+		// if the x isn't being set
 		if(newX == 0){
-			this.x = Math.floor(getRandom(4, 10))*25;
+			// put the platform somewhere random on the x axis
+			this.x = Math.floor(getRandom(0, 10))*25;
 		}
 		else{
 			this.x = newX;
 		}
+		// if the y isn't being set
 		if(newY == 0){
-			this.y = Math.floor(getRandom(4, 10))*25;
-			this.y = clamp(this.y, 200, 0)
+			// put the platform somewhere random on the y axis
+			this.y = Math.floor(getRandom(5, 15))*25;
+//			this.y = clamp(this.y, 200, 0)
 		}
 		else{
 			this.y = newY;
@@ -207,6 +211,6 @@ class Key extends PIXI.Sprite{
 		// randomize x pos within screen width
 		this.x = getRandom(this.width, sceneWidth);
 		// randomize y pos within top half of the game screen
-		this.y = getRandom(this.height, sceneHeight/2);
+		this.y = getRandom(30, 200);
 	}
 }
