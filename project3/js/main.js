@@ -46,6 +46,9 @@ function setup() {
 		let wall1 = new Platform(100, 20, 0xFF0000, 40, sceneHeight - 400);
 		app.stage.addChild(wall1);
 		walls.push(wall1);
+		let wall2 = new Platform(100, 20, 0xFF0000, 40, sceneHeight - 400);
+		app.stage.addChild(wall2);
+		walls.push(wall2);
 	}
 	
 	// Hazards instantiation
@@ -169,10 +172,10 @@ function setup() {
 					player.isGrounded = true;
 				}
 				
-				if(platforms[i].moving){
+				if(walls[i].moving){
 					// move with the platform
-					player.x += platforms[i].dx * dt;
-					player.y += platforms[i].dy * dt;
+					player.x += walls[i].dx * dt;
+					player.y += walls[i].dy * dt;
 				}
 			}
 		}
@@ -200,9 +203,13 @@ function setup() {
 	
 }
 
+// randomly lay out the level
 function setLevel(){
 	
+	// reset player position
 	player.resetPos();
+	
+	// place the key somewhere within the key-space
 	key.randomPos(sceneWidth, sceneHeight);
 	
 	if(currentPlatforms.length > 0){

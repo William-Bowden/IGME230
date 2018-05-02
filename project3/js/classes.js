@@ -100,6 +100,7 @@ class Avatar extends PIXI.Graphics{
 		}
 		
 		this.soundPlaying = false;
+		
 	}
 	
 	collide(force){				
