@@ -16,6 +16,7 @@ let bounceSounds = [];
 
 // Objects
 let player;
+let currentScore = 0;
 let platforms = [];
 let walls = [];
 let hazards = [];
@@ -195,6 +196,7 @@ function setup() {
 // KEY
         if(rectsIntersect(player, key)){   
 			pickupSound.play();
+            currentScore++;
             setLevel();
         }
         
@@ -300,4 +302,16 @@ function setLevel(){
 			app.stage.removeChild(plat);
 		}
 	}
+    
+    let lowPlatCount = 0;
+    
+    for(plat of currentPlatforms){
+        if(plat.y > sceneHeight){
+            lowPlatCount++;
+        }
+        
+        if(lowPlatCount >= currentPlatforms.length){
+            plat.y -= 100;
+        }
+    }
 }
