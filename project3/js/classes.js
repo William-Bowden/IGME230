@@ -1,5 +1,5 @@
 class Avatar extends PIXI.Graphics{
-	constructor(sounds, radius=10, color=0xFF0000, x=0, y=0, speed=5){
+	constructor(sounds, radius=10, color=0x00FF00, x=0, y=0, speed=5){
 		super();
 		this.radius = radius;
 		this.x = x;
@@ -137,7 +137,7 @@ class Avatar extends PIXI.Graphics{
 }
 
 class Platform extends PIXI.Graphics{
-	constructor(width=100, height=10, color=0x476CAD, x=Math.floor(getRandom(4, 10))*25, y=Math.floor(getRandom(4, 10))*25, isActive=false, moving=false){
+	constructor(width=100, height=10, color=0x476CAD, x=0, y=0, isActive=false, moving=false){
 		super();
 		this.x = x;
 		this.y = y;
@@ -164,15 +164,16 @@ class Platform extends PIXI.Graphics{
             this.y += this.dy * dt;
 			
 			// reverse x direction
-            if(this.x >= sceneWidth-(this.width*2) || this.x <= -this.width){
+            if(this.x >= sceneWidth-(this.width) || this.x <= 0){
                this.dx = -this.dx;
             }
 			
 			// reverse y direction
-			if(this.y > sceneHeight - 200 || this.y < 20){
+			if(this.y >= sceneHeight - this.height || this.y <= 200){
                this.dy = -this.dy;
             }
-        }   
+        }
+        
 	}
 	
 	relocate(newX=0, newY=0){
@@ -180,7 +181,7 @@ class Platform extends PIXI.Graphics{
 		// if the x isn't being set
 		if(newX == 0){
 			// put the platform somewhere random on the x axis
-			this.x = Math.floor(getRandom(0, 10))*25;
+			this.x = Math.floor(getRandom(2, 7))*25;
 		}
 		else{
 			this.x = newX;
@@ -188,13 +189,17 @@ class Platform extends PIXI.Graphics{
 		// if the y isn't being set
 		if(newY == 0){
 			// put the platform somewhere random on the y axis
-			this.y = Math.floor(getRandom(5, 15))*25;
+			this.y = Math.floor(getRandom(8, 12))*25;
 		}
 		else{
 			this.y = newY;
 		}
 		
-		
+	}
+    
+    resize(){
+        // put the platform somewhere random on the x axis
+        this.width = Math.floor(getRandom(5, 20))*10;
 	}
 }
 
@@ -207,10 +212,17 @@ class Key extends PIXI.Sprite{
 		this.y = y;
 	}
 	
-	randomPos(sceneWidth, sceneHeight){
+	randomPos(hazards, sceneWidth, sceneHeight){
 		// randomize x pos within screen width
-		this.x = getRandom(this.width, sceneWidth);
+		this.x = getRandom(this.width * 2, sceneWidth - this.width * 3);
 		// randomize y pos within top half of the game screen
 		this.y = getRandom(30, 175);
+        
+        // if it's within any hazards, reposition it again
+        for(hazard in hazards){
+            if(rectsIntersect(hazard, this)){
+                this.randomPos(hazards, sceneWidth, sceneHeight);
+            }
+        }
 	}
 }
