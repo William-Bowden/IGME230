@@ -23,6 +23,7 @@ class Avatar extends PIXI.Graphics{
 		this.soundPlaying = false;
 	}
 	
+	// check for keyboard input, move accordingly
 	update(dt, sceneWidth, sceneHeight){
 		
 		if(keys[keyboard.UP] && player.isGrounded) {
@@ -103,6 +104,7 @@ class Avatar extends PIXI.Graphics{
 		
 	}
 	
+	// "animate" player bouncing and play a bounce noise
 	collide(force){				
 		this.height -= force;
 		this.width += force;
@@ -121,7 +123,7 @@ class Avatar extends PIXI.Graphics{
 		this.lives -= 1;
 
 		if(this.lives <= 0){
-			console.log("Ded");
+			return true;
 		}
 	}
 	
@@ -157,6 +159,7 @@ class Platform extends PIXI.Graphics{
 		}
 	}
     
+	// updates the position of the platform if it is a moving platform
     update(dt, sceneWidth, sceneHeight){
 
 		if(this.moving){
@@ -176,12 +179,14 @@ class Platform extends PIXI.Graphics{
         
 	}
 	
-	relocate(newX=0, newY=0){
+	
+	// moves the platform to a new location within the scene (bounds represented by sceneWidth, sceneHeight)
+	relocate(sceneWidth, sceneHeight, newX=0, newY=0){
 		
 		// if the x isn't being set
 		if(newX == 0){
 			// put the platform somewhere random on the x axis
-			this.x = Math.floor(getRandom(2, 7))*25;
+			this.x = Math.floor(getRandom(2, Math.floor(sceneWidth/30)))*25;
 		}
 		else{
 			this.x = newX;
@@ -197,6 +202,7 @@ class Platform extends PIXI.Graphics{
 		
 	}
     
+	// resizes the width of the platform
     resize(){
         // put the platform somewhere random on the x axis
         this.width = Math.floor(getRandom(5, 20))*10;
@@ -212,6 +218,7 @@ class Key extends PIXI.Sprite{
 		this.y = y;
 	}
 	
+	// places the key in a random location in the upper ~1/3 of the gamespace
 	randomPos(hazards, sceneWidth, sceneHeight){
 		// randomize x pos within screen width
 		this.x = getRandom(this.width * 2, sceneWidth - this.width * 3);
@@ -220,7 +227,7 @@ class Key extends PIXI.Sprite{
         
         // if it's within any hazards, reposition it again
         for(hazard in hazards){
-            if(rectsIntersect(hazard, this)){
+            while(rectsIntersect(hazard, this)){
                 this.randomPos(hazards, sceneWidth, sceneHeight);
             }
         }

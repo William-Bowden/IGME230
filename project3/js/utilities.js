@@ -17,12 +17,6 @@
     }
     
     // bounding box collision detection - it compares PIXI.Rectangles
-//	function rectsIntersect(a,b){
-//		var ab = a.getBounds();
-//		var bb = b.getBounds();
-//		return ab.x + ab.width > bb.x && ab.x < bb.x + bb.width && ab.y + ab.height > bb.y && ab.y < bb.y + bb.height;
-//	}
-
 	function rectsIntersect(a,b,xOffset=0,yOffset=0){
 		var ab = a.getBounds();
 		var bb = b.getBounds();
@@ -48,16 +42,4 @@
 
 	function getRandom(min, max) {
 		return Math.random() * (max - min) + min;
-	}
-
-	function getOutVector(a, b){
-		let ax = a.x;
-		let ay = a.y;
-		let bx = b.x;
-		let by = b.y;
-		
-		let xMagnitude = ax - bx;
-		let yMagnitude = ay - by;
-	
-		return {x:xMagnitude, y:yMagnitude};
 	}
